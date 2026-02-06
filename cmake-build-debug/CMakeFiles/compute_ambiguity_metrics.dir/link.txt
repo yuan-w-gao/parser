@@ -1,1 +1,0 @@
-/usr/bin/c++  -fPIC -include functional -g -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/compute_ambiguity_metrics.dir/src/compute_ambiguity_metrics.cpp.o -o compute_ambiguity_metrics  libambiguity_metrics.a libem_legacy.a libshrg.a

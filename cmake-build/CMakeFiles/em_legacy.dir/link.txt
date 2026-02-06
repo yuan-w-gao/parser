@@ -1,2 +1,0 @@
-/usr/bin/ar qc libem_legacy.a CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.o CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.o CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.o CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.o CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.o CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.o CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.o CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.o CMakeFiles/em_legacy.dir/src/manager.cpp.o
-/usr/bin/ranlib libem_legacy.a
