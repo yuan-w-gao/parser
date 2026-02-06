@@ -1,0 +1,2 @@
+/usr/bin/ar qc libambiguity_metrics.a CMakeFiles/ambiguity_metrics.dir/src/ambiguity_metrics/derivation_entropy.cpp.o CMakeFiles/ambiguity_metrics.dir/src/ambiguity_metrics/expected_derivation_count.cpp.o CMakeFiles/ambiguity_metrics.dir/src/ambiguity_metrics/forest_complexity.cpp.o
+/usr/bin/ranlib libambiguity_metrics.a

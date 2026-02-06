@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC -include functional -g -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/count_derivations.dir/src/count_derivations.cpp.o -o count_derivations  libambiguity_metrics.a libem_legacy.a libshrg.a

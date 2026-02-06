@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC -include functional -g -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/run_em.dir/src/run_em.cpp.o -o run_em  libem_legacy.a libshrg.a
