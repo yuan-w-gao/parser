@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC -include functional -g -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/check_parser.dir/src/check_parser.cpp.o -o check_parser  libshrg.a

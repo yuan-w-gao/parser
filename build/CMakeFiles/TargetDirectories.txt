@@ -1,0 +1,17 @@
+/Users/yuangao/general_graph/parser/build/CMakeFiles/shrg.dir
+/Users/yuangao/general_graph/parser/build/CMakeFiles/em_legacy.dir
+/Users/yuangao/general_graph/parser/build/CMakeFiles/generate.dir
+/Users/yuangao/general_graph/parser/build/CMakeFiles/evaluate.dir
+/Users/yuangao/general_graph/parser/build/CMakeFiles/add_original_sentences.dir
+/Users/yuangao/general_graph/parser/build/CMakeFiles/get_lemma_sentences.dir
+/Users/yuangao/general_graph/parser/build/CMakeFiles/shrg_parser.dir
+/Users/yuangao/general_graph/parser/build/CMakeFiles/check_parser.dir
+/Users/yuangao/general_graph/parser/build/CMakeFiles/treewidth.dir
+/Users/yuangao/general_graph/parser/build/CMakeFiles/manager_test.dir
+/Users/yuangao/general_graph/parser/build/CMakeFiles/run_batch_em.dir
+/Users/yuangao/general_graph/parser/build/CMakeFiles/run_em_viterbi.dir
+/Users/yuangao/general_graph/parser/build/CMakeFiles/run_online_em.dir
+/Users/yuangao/general_graph/parser/build/CMakeFiles/pyshrg.dir
+/Users/yuangao/general_graph/parser/build/CMakeFiles/pyshrg_stubs.dir
+/Users/yuangao/general_graph/parser/build/CMakeFiles/edit_cache.dir
+/Users/yuangao/general_graph/parser/build/CMakeFiles/rebuild_cache.dir

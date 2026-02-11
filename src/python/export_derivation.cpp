@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <numeric>
+#include <random>
 #include <tuple>
 
 #include "extra_chart_item.hpp"
@@ -231,7 +232,9 @@ py::list Context_ExportDerivation(const Context &self,                          
                 current_ptr = current_ptr->next_ptr;
             } while (current_ptr != chart_item_ptr);
 
-            std::random_shuffle(sampled_ptrs.begin() + 1, sampled_ptrs.end());
+            std::random_device rd;
+            std::mt19937 g(rd());
+            std::shuffle(sampled_ptrs.begin() + 1, sampled_ptrs.end(), g);
             if (sampled_ptrs.size() > num_negative_samples + 1)
                 sampled_ptrs.erase(sampled_ptrs.begin() + num_negative_samples + 1,
                                    sampled_ptrs.end());
