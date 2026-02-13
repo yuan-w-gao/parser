@@ -1053,13 +1053,24 @@ void EM::run_safe() {
         std::cout << "\r[parsing] " << graph.sentence_id
                   << " (" << (i + 1) << "/" << training_size << ")" << std::flush;
 
-        // Fork a child to test if parsing is safe
+        // Fork a child to test if full processing is safe
         pid_t pid = fork();
         if (pid == 0) {
-            // Child: attempt parse with time limit, then exit
+            // Child: attempt full processing with time limit, then exit
             alarm(time_out_in_seconds);
             auto child_code = context->Parse(graph);
-            _exit(child_code == ParserError::kNone ? 0 : 1);
+            if (child_code != ParserError::kNone) _exit(1);
+
+            // Also test the operations that can crash on complex forests
+            ChartItem* root = context->parser->Result();
+            addParentPointerOptimized(root, 0);
+            addRulePointer(root);
+
+            // Test forest traversal (catches issues with huge forests)
+            std::unordered_set<ChartItem*> all_items;
+            collectAllReachableItems(root, all_items);
+
+            _exit(0);
         }
 
         if (pid < 0) {
