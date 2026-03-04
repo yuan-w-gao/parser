@@ -53,10 +53,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/yuangao/general_graph/parser
+CMAKE_SOURCE_DIR = /Users/yuangao/graph_optimization/parser
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/yuangao/general_graph/parser/build
+CMAKE_BINARY_DIR = /Users/yuangao/graph_optimization/parser/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/em_legacy.dir/depend.make
@@ -73,130 +73,130 @@ CMakeFiles/em_legacy.dir/codegen:
 .PHONY : CMakeFiles/em_legacy.dir/codegen
 
 CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.o: CMakeFiles/em_legacy.dir/flags.make
-CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.o: /Users/yuangao/general_graph/parser/src/em_framework/em.cpp
+CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.o: /Users/yuangao/graph_optimization/parser/src/em_framework/em.cpp
 CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.o: CMakeFiles/em_legacy.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.o -MF CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.o.d -o CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.o -c /Users/yuangao/general_graph/parser/src/em_framework/em.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.o -MF CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.o.d -o CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.o -c /Users/yuangao/graph_optimization/parser/src/em_framework/em.cpp
 
 CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/em_framework/em.cpp > CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/em_framework/em.cpp > CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.i
 
 CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/em_framework/em.cpp -o CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/em_framework/em.cpp -o CMakeFiles/em_legacy.dir/src/em_framework/em.cpp.s
 
 CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.o: CMakeFiles/em_legacy.dir/flags.make
-CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.o: /Users/yuangao/general_graph/parser/src/em_framework/em_base.cpp
+CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.o: /Users/yuangao/graph_optimization/parser/src/em_framework/em_base.cpp
 CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.o: CMakeFiles/em_legacy.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.o -MF CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.o.d -o CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.o -c /Users/yuangao/general_graph/parser/src/em_framework/em_base.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.o -MF CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.o.d -o CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.o -c /Users/yuangao/graph_optimization/parser/src/em_framework/em_base.cpp
 
 CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/em_framework/em_base.cpp > CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/em_framework/em_base.cpp > CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.i
 
 CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/em_framework/em_base.cpp -o CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/em_framework/em_base.cpp -o CMakeFiles/em_legacy.dir/src/em_framework/em_base.cpp.s
 
 CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.o: CMakeFiles/em_legacy.dir/flags.make
-CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.o: /Users/yuangao/general_graph/parser/src/em_framework/em_batch.cpp
+CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.o: /Users/yuangao/graph_optimization/parser/src/em_framework/em_batch.cpp
 CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.o: CMakeFiles/em_legacy.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.o -MF CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.o.d -o CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.o -c /Users/yuangao/general_graph/parser/src/em_framework/em_batch.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.o -MF CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.o.d -o CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.o -c /Users/yuangao/graph_optimization/parser/src/em_framework/em_batch.cpp
 
 CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/em_framework/em_batch.cpp > CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/em_framework/em_batch.cpp > CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.i
 
 CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/em_framework/em_batch.cpp -o CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/em_framework/em_batch.cpp -o CMakeFiles/em_legacy.dir/src/em_framework/em_batch.cpp.s
 
 CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.o: CMakeFiles/em_legacy.dir/flags.make
-CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.o: /Users/yuangao/general_graph/parser/src/em_framework/em_evaluate/eval_deriv.cpp
+CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.o: /Users/yuangao/graph_optimization/parser/src/em_framework/em_evaluate/eval_deriv.cpp
 CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.o: CMakeFiles/em_legacy.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.o -MF CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.o.d -o CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.o -c /Users/yuangao/general_graph/parser/src/em_framework/em_evaluate/eval_deriv.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.o -MF CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.o.d -o CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.o -c /Users/yuangao/graph_optimization/parser/src/em_framework/em_evaluate/eval_deriv.cpp
 
 CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/em_framework/em_evaluate/eval_deriv.cpp > CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/em_framework/em_evaluate/eval_deriv.cpp > CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.i
 
 CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/em_framework/em_evaluate/eval_deriv.cpp -o CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/em_framework/em_evaluate/eval_deriv.cpp -o CMakeFiles/em_legacy.dir/src/em_framework/em_evaluate/eval_deriv.cpp.s
 
 CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.o: CMakeFiles/em_legacy.dir/flags.make
-CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.o: /Users/yuangao/general_graph/parser/src/em_framework/em_online.cpp
+CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.o: /Users/yuangao/graph_optimization/parser/src/em_framework/em_online.cpp
 CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.o: CMakeFiles/em_legacy.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.o -MF CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.o.d -o CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.o -c /Users/yuangao/general_graph/parser/src/em_framework/em_online.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.o -MF CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.o.d -o CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.o -c /Users/yuangao/graph_optimization/parser/src/em_framework/em_online.cpp
 
 CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/em_framework/em_online.cpp > CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/em_framework/em_online.cpp > CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.i
 
 CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/em_framework/em_online.cpp -o CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/em_framework/em_online.cpp -o CMakeFiles/em_legacy.dir/src/em_framework/em_online.cpp.s
 
 CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.o: CMakeFiles/em_legacy.dir/flags.make
-CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.o: /Users/yuangao/general_graph/parser/src/em_framework/em_utils.cpp
+CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.o: /Users/yuangao/graph_optimization/parser/src/em_framework/em_utils.cpp
 CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.o: CMakeFiles/em_legacy.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.o -MF CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.o.d -o CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.o -c /Users/yuangao/general_graph/parser/src/em_framework/em_utils.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.o -MF CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.o.d -o CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.o -c /Users/yuangao/graph_optimization/parser/src/em_framework/em_utils.cpp
 
 CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/em_framework/em_utils.cpp > CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/em_framework/em_utils.cpp > CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.i
 
 CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/em_framework/em_utils.cpp -o CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/em_framework/em_utils.cpp -o CMakeFiles/em_legacy.dir/src/em_framework/em_utils.cpp.s
 
 CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.o: CMakeFiles/em_legacy.dir/flags.make
-CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.o: /Users/yuangao/general_graph/parser/src/em_framework/em_viterbi.cpp
+CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.o: /Users/yuangao/graph_optimization/parser/src/em_framework/em_viterbi.cpp
 CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.o: CMakeFiles/em_legacy.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.o -MF CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.o.d -o CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.o -c /Users/yuangao/general_graph/parser/src/em_framework/em_viterbi.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.o -MF CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.o.d -o CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.o -c /Users/yuangao/graph_optimization/parser/src/em_framework/em_viterbi.cpp
 
 CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/em_framework/em_viterbi.cpp > CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/em_framework/em_viterbi.cpp > CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.i
 
 CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/em_framework/em_viterbi.cpp -o CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/em_framework/em_viterbi.cpp -o CMakeFiles/em_legacy.dir/src/em_framework/em_viterbi.cpp.s
 
 CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.o: CMakeFiles/em_legacy.dir/flags.make
-CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.o: /Users/yuangao/general_graph/parser/src/em_framework/find_derivations.cpp
+CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.o: /Users/yuangao/graph_optimization/parser/src/em_framework/find_derivations.cpp
 CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.o: CMakeFiles/em_legacy.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.o -MF CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.o.d -o CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.o -c /Users/yuangao/general_graph/parser/src/em_framework/find_derivations.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.o -MF CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.o.d -o CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.o -c /Users/yuangao/graph_optimization/parser/src/em_framework/find_derivations.cpp
 
 CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/em_framework/find_derivations.cpp > CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/em_framework/find_derivations.cpp > CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.i
 
 CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/em_framework/find_derivations.cpp -o CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/em_framework/find_derivations.cpp -o CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.s
 
 CMakeFiles/em_legacy.dir/src/manager.cpp.o: CMakeFiles/em_legacy.dir/flags.make
-CMakeFiles/em_legacy.dir/src/manager.cpp.o: /Users/yuangao/general_graph/parser/src/manager.cpp
+CMakeFiles/em_legacy.dir/src/manager.cpp.o: /Users/yuangao/graph_optimization/parser/src/manager.cpp
 CMakeFiles/em_legacy.dir/src/manager.cpp.o: CMakeFiles/em_legacy.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/em_legacy.dir/src/manager.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/em_legacy.dir/src/manager.cpp.o -MF CMakeFiles/em_legacy.dir/src/manager.cpp.o.d -o CMakeFiles/em_legacy.dir/src/manager.cpp.o -c /Users/yuangao/general_graph/parser/src/manager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/em_legacy.dir/src/manager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/em_legacy.dir/src/manager.cpp.o -MF CMakeFiles/em_legacy.dir/src/manager.cpp.o.d -o CMakeFiles/em_legacy.dir/src/manager.cpp.o -c /Users/yuangao/graph_optimization/parser/src/manager.cpp
 
 CMakeFiles/em_legacy.dir/src/manager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/em_legacy.dir/src/manager.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/manager.cpp > CMakeFiles/em_legacy.dir/src/manager.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/manager.cpp > CMakeFiles/em_legacy.dir/src/manager.cpp.i
 
 CMakeFiles/em_legacy.dir/src/manager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/em_legacy.dir/src/manager.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/manager.cpp -o CMakeFiles/em_legacy.dir/src/manager.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/manager.cpp -o CMakeFiles/em_legacy.dir/src/manager.cpp.s
 
 # Object files for target em_legacy
 em_legacy_OBJECTS = \
@@ -224,7 +224,7 @@ libem_legacy.a: CMakeFiles/em_legacy.dir/src/em_framework/find_derivations.cpp.o
 libem_legacy.a: CMakeFiles/em_legacy.dir/src/manager.cpp.o
 libem_legacy.a: CMakeFiles/em_legacy.dir/build.make
 libem_legacy.a: CMakeFiles/em_legacy.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX static library libem_legacy.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX static library libem_legacy.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/em_legacy.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/em_legacy.dir/link.txt --verbose=$(VERBOSE)
 
@@ -237,6 +237,6 @@ CMakeFiles/em_legacy.dir/clean:
 .PHONY : CMakeFiles/em_legacy.dir/clean
 
 CMakeFiles/em_legacy.dir/depend:
-	cd /Users/yuangao/general_graph/parser/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/yuangao/general_graph/parser /Users/yuangao/general_graph/parser /Users/yuangao/general_graph/parser/build /Users/yuangao/general_graph/parser/build /Users/yuangao/general_graph/parser/build/CMakeFiles/em_legacy.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/yuangao/graph_optimization/parser/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/yuangao/graph_optimization/parser /Users/yuangao/graph_optimization/parser /Users/yuangao/graph_optimization/parser/build /Users/yuangao/graph_optimization/parser/build /Users/yuangao/graph_optimization/parser/build/CMakeFiles/em_legacy.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/em_legacy.dir/depend
 

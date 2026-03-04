@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/yuangao/general_graph/parser/src/generate.cpp" "CMakeFiles/generate.dir/src/generate.cpp.o" "gcc" "CMakeFiles/generate.dir/src/generate.cpp.o.d"
+  "/Users/yuangao/graph_optimization/parser/src/generate.cpp" "CMakeFiles/generate.dir/src/generate.cpp.o" "gcc" "CMakeFiles/generate.dir/src/generate.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

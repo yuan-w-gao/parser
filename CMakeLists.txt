@@ -56,9 +56,11 @@ include_directories(/Library/Developer/CommandLineTools/usr/include/c++/v1)
 
 # Core SHRG graph parser library
 file(GLOB GRAPH_PARSER_SOURCES "src/graph_parser/*.cpp")
+file(GLOB AMBIGUITY_METRICS_SOURCES "src/ambiguity_metrics/*.cpp")
 add_library(shrg STATIC
     "src/include/bleu.cpp"
     ${GRAPH_PARSER_SOURCES}
+    ${AMBIGUITY_METRICS_SOURCES}
 )
 set_target_properties(shrg PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
 

@@ -22,6 +22,29 @@
 #include <iomanip>
 #include <numeric>
 
+// Memory tracking for macOS
+#ifdef __APPLE__
+#include <mach/mach.h>
+#endif
+
+namespace {
+    // Get current process memory usage in MB
+    double getMemoryUsageMB() {
+#ifdef __APPLE__
+        struct mach_task_basic_info info;
+        mach_msg_type_number_t size = MACH_TASK_BASIC_INFO_COUNT;
+        kern_return_t kerr = task_info(mach_task_self(),
+                                       MACH_TASK_BASIC_INFO,
+                                       (task_info_t)&info,
+                                       &size);
+        if (kerr == KERN_SUCCESS) {
+            return static_cast<double>(info.resident_size) / (1024.0 * 1024.0);
+        }
+#endif
+        return -1.0;  // Unknown
+    }
+}
+
 
 namespace shrg::em {
  EM::EM(RuleVector &shrg_rules, std::vector<EdsGraph> &graphs, Context *context, double threshold)
@@ -1022,6 +1045,7 @@ void EM::run_safe() {
     std::cout << "Training with cached derivation forests (safe mode)...\n";
     clock_t t1, t2;
     unsigned long training_size = graphs.size();
+    double initial_mem = getMemoryUsageMB();
 
     if (profiling_enabled_) {
         graph_metrics_.clear();
@@ -1050,27 +1074,29 @@ void EM::run_safe() {
             continue;
         }
 
+        double current_mem = getMemoryUsageMB();
         std::cout << "\r[parsing] " << graph.sentence_id
-                  << " (" << (i + 1) << "/" << training_size << ")" << std::flush;
+                  << " (" << (i + 1) << "/" << training_size << ")"
+                  << " [mem: " << std::fixed << std::setprecision(0) << current_mem << "MB"
+                  << ", cached: " << cached_forests.size() << "]" << std::flush;
 
-        // Fork a child to test if full processing is safe
+        // Fork a child to test if parsing is safe
         pid_t pid = fork();
         if (pid == 0) {
-            // Child: attempt full processing with time limit, then exit
+            // Child: attempt parse AND deep copy with time limit, then exit
+            // This tests actual memory usage, not just parse success
             alarm(time_out_in_seconds);
             auto child_code = context->Parse(graph);
-            if (child_code != ParserError::kNone) _exit(1);
-
-            // Also test the operations that can crash on complex forests
-            ChartItem* root = context->parser->Result();
-            addParentPointerOptimized(root, 0);
-            addRulePointer(root);
-
-            // Test forest traversal (catches issues with huge forests)
-            std::unordered_set<ChartItem*> all_items;
-            collectAllReachableItems(root, all_items);
-
-            _exit(0);
+            if (child_code == ParserError::kNone) {
+                // Also test the memory-intensive deep copy operation
+                ChartItem* root = context->parser->Result();
+                addParentPointerOptimized(root, 0);
+                addRulePointer(root);
+                // Create temporary pool and test deep copy
+                utils::MemoryPool<ChartItem> test_pool;
+                deepCopyDerivationForest(root, test_pool);
+            }
+            _exit(child_code == ParserError::kNone ? 0 : 1);
         }
 
         if (pid < 0) {
@@ -1138,6 +1164,14 @@ void EM::run_safe() {
             }
 
             cached_forests.push_back({persistent_root, graph.sentence_id, i, metrics_idx});
+
+            // Debug: print memory every 500 forests
+            if (cached_forests.size() % 500 == 0) {
+                double mem_now = getMemoryUsageMB();
+                std::cout << "\n  [DEBUG] After " << cached_forests.size() << " forests: "
+                          << std::fixed << std::setprecision(1) << mem_now << " MB"
+                          << " (+" << (mem_now - initial_mem) << " MB from start)\n";
+            }
         } else if (profiling_enabled_) {
             graph_metrics_.push_back(metrics);
         }
@@ -1145,9 +1179,12 @@ void EM::run_safe() {
 
     t2 = clock();
     double parse_time = (double)(t2 - t1) / CLOCKS_PER_SEC;
+    double final_mem = getMemoryUsageMB();
     std::cout << "\nParsing complete: " << cached_forests.size() << " forests cached, "
               << skipped_count << " skipped (unsafe), in "
-              << parse_time << " seconds\n\n";
+              << parse_time << " seconds\n";
+    std::cout << "  [DEBUG] Final memory: " << std::fixed << std::setprecision(1) << final_mem << " MB"
+              << " (+" << (final_mem - initial_mem) << " MB from start)\n\n";
 
     if (profiling_enabled_ && !(output_dir == "N")) {
         writeMetricsToCSV(output_dir + "parse_metrics.csv");

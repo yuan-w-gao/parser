@@ -57,10 +57,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/yuangao/general_graph/parser
+CMAKE_SOURCE_DIR = /Users/yuangao/graph_optimization/parser
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/yuangao/general_graph/parser/build
+CMAKE_BINARY_DIR = /Users/yuangao/graph_optimization/parser/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yuangao/general_graph/parser/build/CMakeFiles /Users/yuangao/general_graph/parser/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yuangao/graph_optimization/parser/build/CMakeFiles /Users/yuangao/graph_optimization/parser/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yuangao/general_graph/parser/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yuangao/graph_optimization/parser/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -310,6 +310,78 @@ pyshrg_stubs: cmake_check_build_system
 pyshrg_stubs/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pyshrg_stubs.dir/build.make CMakeFiles/pyshrg_stubs.dir/build
 .PHONY : pyshrg_stubs/fast
+
+src/ambiguity_metrics/derivation_entropy.o: src/ambiguity_metrics/derivation_entropy.cpp.o
+.PHONY : src/ambiguity_metrics/derivation_entropy.o
+
+# target to build an object file
+src/ambiguity_metrics/derivation_entropy.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/shrg.dir/build.make CMakeFiles/shrg.dir/src/ambiguity_metrics/derivation_entropy.cpp.o
+.PHONY : src/ambiguity_metrics/derivation_entropy.cpp.o
+
+src/ambiguity_metrics/derivation_entropy.i: src/ambiguity_metrics/derivation_entropy.cpp.i
+.PHONY : src/ambiguity_metrics/derivation_entropy.i
+
+# target to preprocess a source file
+src/ambiguity_metrics/derivation_entropy.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/shrg.dir/build.make CMakeFiles/shrg.dir/src/ambiguity_metrics/derivation_entropy.cpp.i
+.PHONY : src/ambiguity_metrics/derivation_entropy.cpp.i
+
+src/ambiguity_metrics/derivation_entropy.s: src/ambiguity_metrics/derivation_entropy.cpp.s
+.PHONY : src/ambiguity_metrics/derivation_entropy.s
+
+# target to generate assembly for a file
+src/ambiguity_metrics/derivation_entropy.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/shrg.dir/build.make CMakeFiles/shrg.dir/src/ambiguity_metrics/derivation_entropy.cpp.s
+.PHONY : src/ambiguity_metrics/derivation_entropy.cpp.s
+
+src/ambiguity_metrics/expected_derivation_count.o: src/ambiguity_metrics/expected_derivation_count.cpp.o
+.PHONY : src/ambiguity_metrics/expected_derivation_count.o
+
+# target to build an object file
+src/ambiguity_metrics/expected_derivation_count.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/shrg.dir/build.make CMakeFiles/shrg.dir/src/ambiguity_metrics/expected_derivation_count.cpp.o
+.PHONY : src/ambiguity_metrics/expected_derivation_count.cpp.o
+
+src/ambiguity_metrics/expected_derivation_count.i: src/ambiguity_metrics/expected_derivation_count.cpp.i
+.PHONY : src/ambiguity_metrics/expected_derivation_count.i
+
+# target to preprocess a source file
+src/ambiguity_metrics/expected_derivation_count.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/shrg.dir/build.make CMakeFiles/shrg.dir/src/ambiguity_metrics/expected_derivation_count.cpp.i
+.PHONY : src/ambiguity_metrics/expected_derivation_count.cpp.i
+
+src/ambiguity_metrics/expected_derivation_count.s: src/ambiguity_metrics/expected_derivation_count.cpp.s
+.PHONY : src/ambiguity_metrics/expected_derivation_count.s
+
+# target to generate assembly for a file
+src/ambiguity_metrics/expected_derivation_count.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/shrg.dir/build.make CMakeFiles/shrg.dir/src/ambiguity_metrics/expected_derivation_count.cpp.s
+.PHONY : src/ambiguity_metrics/expected_derivation_count.cpp.s
+
+src/ambiguity_metrics/forest_complexity.o: src/ambiguity_metrics/forest_complexity.cpp.o
+.PHONY : src/ambiguity_metrics/forest_complexity.o
+
+# target to build an object file
+src/ambiguity_metrics/forest_complexity.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/shrg.dir/build.make CMakeFiles/shrg.dir/src/ambiguity_metrics/forest_complexity.cpp.o
+.PHONY : src/ambiguity_metrics/forest_complexity.cpp.o
+
+src/ambiguity_metrics/forest_complexity.i: src/ambiguity_metrics/forest_complexity.cpp.i
+.PHONY : src/ambiguity_metrics/forest_complexity.i
+
+# target to preprocess a source file
+src/ambiguity_metrics/forest_complexity.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/shrg.dir/build.make CMakeFiles/shrg.dir/src/ambiguity_metrics/forest_complexity.cpp.i
+.PHONY : src/ambiguity_metrics/forest_complexity.cpp.i
+
+src/ambiguity_metrics/forest_complexity.s: src/ambiguity_metrics/forest_complexity.cpp.s
+.PHONY : src/ambiguity_metrics/forest_complexity.s
+
+# target to generate assembly for a file
+src/ambiguity_metrics/forest_complexity.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/shrg.dir/build.make CMakeFiles/shrg.dir/src/ambiguity_metrics/forest_complexity.cpp.s
+.PHONY : src/ambiguity_metrics/forest_complexity.cpp.s
 
 src/check_parser.o: src/check_parser.cpp.o
 .PHONY : src/check_parser.o
@@ -1055,6 +1127,30 @@ src/python/export_derivation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pyshrg.dir/build.make CMakeFiles/pyshrg.dir/src/python/export_derivation.cpp.s
 .PHONY : src/python/export_derivation.cpp.s
 
+src/python/extra_ambiguity_metrics.o: src/python/extra_ambiguity_metrics.cpp.o
+.PHONY : src/python/extra_ambiguity_metrics.o
+
+# target to build an object file
+src/python/extra_ambiguity_metrics.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pyshrg.dir/build.make CMakeFiles/pyshrg.dir/src/python/extra_ambiguity_metrics.cpp.o
+.PHONY : src/python/extra_ambiguity_metrics.cpp.o
+
+src/python/extra_ambiguity_metrics.i: src/python/extra_ambiguity_metrics.cpp.i
+.PHONY : src/python/extra_ambiguity_metrics.i
+
+# target to preprocess a source file
+src/python/extra_ambiguity_metrics.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pyshrg.dir/build.make CMakeFiles/pyshrg.dir/src/python/extra_ambiguity_metrics.cpp.i
+.PHONY : src/python/extra_ambiguity_metrics.cpp.i
+
+src/python/extra_ambiguity_metrics.s: src/python/extra_ambiguity_metrics.cpp.s
+.PHONY : src/python/extra_ambiguity_metrics.s
+
+# target to generate assembly for a file
+src/python/extra_ambiguity_metrics.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pyshrg.dir/build.make CMakeFiles/pyshrg.dir/src/python/extra_ambiguity_metrics.cpp.s
+.PHONY : src/python/extra_ambiguity_metrics.cpp.s
+
 src/python/extra_chart_item.o: src/python/extra_chart_item.cpp.o
 .PHONY : src/python/extra_chart_item.o
 
@@ -1199,29 +1295,29 @@ src/python/find_best_derivation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pyshrg.dir/build.make CMakeFiles/pyshrg.dir/src/python/find_best_derivation.cpp.s
 .PHONY : src/python/find_best_derivation.cpp.s
 
-src/python/inside_outside.o: src/python/inside_outside.cpp.o
-.PHONY : src/python/inside_outside.o
+src/python/inside_outside_impl.o: src/python/inside_outside_impl.cpp.o
+.PHONY : src/python/inside_outside_impl.o
 
 # target to build an object file
-src/python/inside_outside.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pyshrg.dir/build.make CMakeFiles/pyshrg.dir/src/python/inside_outside.cpp.o
-.PHONY : src/python/inside_outside.cpp.o
+src/python/inside_outside_impl.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pyshrg.dir/build.make CMakeFiles/pyshrg.dir/src/python/inside_outside_impl.cpp.o
+.PHONY : src/python/inside_outside_impl.cpp.o
 
-src/python/inside_outside.i: src/python/inside_outside.cpp.i
-.PHONY : src/python/inside_outside.i
+src/python/inside_outside_impl.i: src/python/inside_outside_impl.cpp.i
+.PHONY : src/python/inside_outside_impl.i
 
 # target to preprocess a source file
-src/python/inside_outside.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pyshrg.dir/build.make CMakeFiles/pyshrg.dir/src/python/inside_outside.cpp.i
-.PHONY : src/python/inside_outside.cpp.i
+src/python/inside_outside_impl.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pyshrg.dir/build.make CMakeFiles/pyshrg.dir/src/python/inside_outside_impl.cpp.i
+.PHONY : src/python/inside_outside_impl.cpp.i
 
-src/python/inside_outside.s: src/python/inside_outside.cpp.s
-.PHONY : src/python/inside_outside.s
+src/python/inside_outside_impl.s: src/python/inside_outside_impl.cpp.s
+.PHONY : src/python/inside_outside_impl.s
 
 # target to generate assembly for a file
-src/python/inside_outside.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pyshrg.dir/build.make CMakeFiles/pyshrg.dir/src/python/inside_outside.cpp.s
-.PHONY : src/python/inside_outside.cpp.s
+src/python/inside_outside_impl.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pyshrg.dir/build.make CMakeFiles/pyshrg.dir/src/python/inside_outside_impl.cpp.s
+.PHONY : src/python/inside_outside_impl.cpp.s
 
 src/python/interface.o: src/python/interface.cpp.o
 .PHONY : src/python/interface.o
@@ -1438,6 +1534,15 @@ help:
 	@echo "... shrg"
 	@echo "... shrg_parser"
 	@echo "... treewidth"
+	@echo "... src/ambiguity_metrics/derivation_entropy.o"
+	@echo "... src/ambiguity_metrics/derivation_entropy.i"
+	@echo "... src/ambiguity_metrics/derivation_entropy.s"
+	@echo "... src/ambiguity_metrics/expected_derivation_count.o"
+	@echo "... src/ambiguity_metrics/expected_derivation_count.i"
+	@echo "... src/ambiguity_metrics/expected_derivation_count.s"
+	@echo "... src/ambiguity_metrics/forest_complexity.o"
+	@echo "... src/ambiguity_metrics/forest_complexity.i"
+	@echo "... src/ambiguity_metrics/forest_complexity.s"
 	@echo "... src/check_parser.o"
 	@echo "... src/check_parser.i"
 	@echo "... src/check_parser.s"
@@ -1531,6 +1636,9 @@ help:
 	@echo "... src/python/export_derivation.o"
 	@echo "... src/python/export_derivation.i"
 	@echo "... src/python/export_derivation.s"
+	@echo "... src/python/extra_ambiguity_metrics.o"
+	@echo "... src/python/extra_ambiguity_metrics.i"
+	@echo "... src/python/extra_ambiguity_metrics.s"
 	@echo "... src/python/extra_chart_item.o"
 	@echo "... src/python/extra_chart_item.i"
 	@echo "... src/python/extra_chart_item.s"
@@ -1549,9 +1657,9 @@ help:
 	@echo "... src/python/find_best_derivation.o"
 	@echo "... src/python/find_best_derivation.i"
 	@echo "... src/python/find_best_derivation.s"
-	@echo "... src/python/inside_outside.o"
-	@echo "... src/python/inside_outside.i"
-	@echo "... src/python/inside_outside.s"
+	@echo "... src/python/inside_outside_impl.o"
+	@echo "... src/python/inside_outside_impl.i"
+	@echo "... src/python/inside_outside_impl.s"
 	@echo "... src/python/interface.o"
 	@echo "... src/python/interface.i"
 	@echo "... src/python/interface.s"

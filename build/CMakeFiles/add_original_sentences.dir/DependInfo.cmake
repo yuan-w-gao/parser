@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/yuangao/general_graph/parser/src/get_original_sentences.cpp" "CMakeFiles/add_original_sentences.dir/src/get_original_sentences.cpp.o" "gcc" "CMakeFiles/add_original_sentences.dir/src/get_original_sentences.cpp.o.d"
+  "/Users/yuangao/graph_optimization/parser/src/get_original_sentences.cpp" "CMakeFiles/add_original_sentences.dir/src/get_original_sentences.cpp.o" "gcc" "CMakeFiles/add_original_sentences.dir/src/get_original_sentences.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

@@ -53,10 +53,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/yuangao/general_graph/parser
+CMAKE_SOURCE_DIR = /Users/yuangao/graph_optimization/parser
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/yuangao/general_graph/parser/build
+CMAKE_BINARY_DIR = /Users/yuangao/graph_optimization/parser/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/shrg.dir/depend.make
@@ -73,228 +73,270 @@ CMakeFiles/shrg.dir/codegen:
 .PHONY : CMakeFiles/shrg.dir/codegen
 
 CMakeFiles/shrg.dir/src/include/bleu.cpp.o: CMakeFiles/shrg.dir/flags.make
-CMakeFiles/shrg.dir/src/include/bleu.cpp.o: /Users/yuangao/general_graph/parser/src/include/bleu.cpp
+CMakeFiles/shrg.dir/src/include/bleu.cpp.o: /Users/yuangao/graph_optimization/parser/src/include/bleu.cpp
 CMakeFiles/shrg.dir/src/include/bleu.cpp.o: CMakeFiles/shrg.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/shrg.dir/src/include/bleu.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/include/bleu.cpp.o -MF CMakeFiles/shrg.dir/src/include/bleu.cpp.o.d -o CMakeFiles/shrg.dir/src/include/bleu.cpp.o -c /Users/yuangao/general_graph/parser/src/include/bleu.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/shrg.dir/src/include/bleu.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/include/bleu.cpp.o -MF CMakeFiles/shrg.dir/src/include/bleu.cpp.o.d -o CMakeFiles/shrg.dir/src/include/bleu.cpp.o -c /Users/yuangao/graph_optimization/parser/src/include/bleu.cpp
 
 CMakeFiles/shrg.dir/src/include/bleu.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shrg.dir/src/include/bleu.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/include/bleu.cpp > CMakeFiles/shrg.dir/src/include/bleu.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/include/bleu.cpp > CMakeFiles/shrg.dir/src/include/bleu.cpp.i
 
 CMakeFiles/shrg.dir/src/include/bleu.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shrg.dir/src/include/bleu.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/include/bleu.cpp -o CMakeFiles/shrg.dir/src/include/bleu.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/include/bleu.cpp -o CMakeFiles/shrg.dir/src/include/bleu.cpp.s
 
 CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.o: CMakeFiles/shrg.dir/flags.make
-CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.o: /Users/yuangao/general_graph/parser/src/graph_parser/edsgraph.cpp
+CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.o: /Users/yuangao/graph_optimization/parser/src/graph_parser/edsgraph.cpp
 CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.o: CMakeFiles/shrg.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.o -c /Users/yuangao/general_graph/parser/src/graph_parser/edsgraph.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.o -c /Users/yuangao/graph_optimization/parser/src/graph_parser/edsgraph.cpp
 
 CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/graph_parser/edsgraph.cpp > CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/graph_parser/edsgraph.cpp > CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.i
 
 CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/graph_parser/edsgraph.cpp -o CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/graph_parser/edsgraph.cpp -o CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.s
 
 CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.o: CMakeFiles/shrg.dir/flags.make
-CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.o: /Users/yuangao/general_graph/parser/src/graph_parser/generator.cpp
+CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.o: /Users/yuangao/graph_optimization/parser/src/graph_parser/generator.cpp
 CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.o: CMakeFiles/shrg.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.o -c /Users/yuangao/general_graph/parser/src/graph_parser/generator.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.o -c /Users/yuangao/graph_optimization/parser/src/graph_parser/generator.cpp
 
 CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/graph_parser/generator.cpp > CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/graph_parser/generator.cpp > CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.i
 
 CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/graph_parser/generator.cpp -o CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/graph_parser/generator.cpp -o CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.s
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_base.cpp.o: CMakeFiles/shrg.dir/flags.make
-CMakeFiles/shrg.dir/src/graph_parser/parser_base.cpp.o: /Users/yuangao/general_graph/parser/src/graph_parser/parser_base.cpp
+CMakeFiles/shrg.dir/src/graph_parser/parser_base.cpp.o: /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_base.cpp
 CMakeFiles/shrg.dir/src/graph_parser/parser_base.cpp.o: CMakeFiles/shrg.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/parser_base.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/parser_base.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/parser_base.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/parser_base.cpp.o -c /Users/yuangao/general_graph/parser/src/graph_parser/parser_base.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/parser_base.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/parser_base.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/parser_base.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/parser_base.cpp.o -c /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_base.cpp
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_base.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shrg.dir/src/graph_parser/parser_base.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/graph_parser/parser_base.cpp > CMakeFiles/shrg.dir/src/graph_parser/parser_base.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_base.cpp > CMakeFiles/shrg.dir/src/graph_parser/parser_base.cpp.i
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_base.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shrg.dir/src/graph_parser/parser_base.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/graph_parser/parser_base.cpp -o CMakeFiles/shrg.dir/src/graph_parser/parser_base.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_base.cpp -o CMakeFiles/shrg.dir/src/graph_parser/parser_base.cpp.s
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_debug.cpp.o: CMakeFiles/shrg.dir/flags.make
-CMakeFiles/shrg.dir/src/graph_parser/parser_debug.cpp.o: /Users/yuangao/general_graph/parser/src/graph_parser/parser_debug.cpp
+CMakeFiles/shrg.dir/src/graph_parser/parser_debug.cpp.o: /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_debug.cpp
 CMakeFiles/shrg.dir/src/graph_parser/parser_debug.cpp.o: CMakeFiles/shrg.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/parser_debug.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/parser_debug.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/parser_debug.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/parser_debug.cpp.o -c /Users/yuangao/general_graph/parser/src/graph_parser/parser_debug.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/parser_debug.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/parser_debug.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/parser_debug.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/parser_debug.cpp.o -c /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_debug.cpp
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_debug.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shrg.dir/src/graph_parser/parser_debug.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/graph_parser/parser_debug.cpp > CMakeFiles/shrg.dir/src/graph_parser/parser_debug.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_debug.cpp > CMakeFiles/shrg.dir/src/graph_parser/parser_debug.cpp.i
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_debug.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shrg.dir/src/graph_parser/parser_debug.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/graph_parser/parser_debug.cpp -o CMakeFiles/shrg.dir/src/graph_parser/parser_debug.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_debug.cpp -o CMakeFiles/shrg.dir/src/graph_parser/parser_debug.cpp.s
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_linear.cpp.o: CMakeFiles/shrg.dir/flags.make
-CMakeFiles/shrg.dir/src/graph_parser/parser_linear.cpp.o: /Users/yuangao/general_graph/parser/src/graph_parser/parser_linear.cpp
+CMakeFiles/shrg.dir/src/graph_parser/parser_linear.cpp.o: /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_linear.cpp
 CMakeFiles/shrg.dir/src/graph_parser/parser_linear.cpp.o: CMakeFiles/shrg.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/parser_linear.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/parser_linear.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/parser_linear.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/parser_linear.cpp.o -c /Users/yuangao/general_graph/parser/src/graph_parser/parser_linear.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/parser_linear.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/parser_linear.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/parser_linear.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/parser_linear.cpp.o -c /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_linear.cpp
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_linear.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shrg.dir/src/graph_parser/parser_linear.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/graph_parser/parser_linear.cpp > CMakeFiles/shrg.dir/src/graph_parser/parser_linear.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_linear.cpp > CMakeFiles/shrg.dir/src/graph_parser/parser_linear.cpp.i
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_linear.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shrg.dir/src/graph_parser/parser_linear.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/graph_parser/parser_linear.cpp -o CMakeFiles/shrg.dir/src/graph_parser/parser_linear.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_linear.cpp -o CMakeFiles/shrg.dir/src/graph_parser/parser_linear.cpp.s
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_linear_base.cpp.o: CMakeFiles/shrg.dir/flags.make
-CMakeFiles/shrg.dir/src/graph_parser/parser_linear_base.cpp.o: /Users/yuangao/general_graph/parser/src/graph_parser/parser_linear_base.cpp
+CMakeFiles/shrg.dir/src/graph_parser/parser_linear_base.cpp.o: /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_linear_base.cpp
 CMakeFiles/shrg.dir/src/graph_parser/parser_linear_base.cpp.o: CMakeFiles/shrg.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/parser_linear_base.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/parser_linear_base.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/parser_linear_base.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/parser_linear_base.cpp.o -c /Users/yuangao/general_graph/parser/src/graph_parser/parser_linear_base.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/parser_linear_base.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/parser_linear_base.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/parser_linear_base.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/parser_linear_base.cpp.o -c /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_linear_base.cpp
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_linear_base.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shrg.dir/src/graph_parser/parser_linear_base.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/graph_parser/parser_linear_base.cpp > CMakeFiles/shrg.dir/src/graph_parser/parser_linear_base.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_linear_base.cpp > CMakeFiles/shrg.dir/src/graph_parser/parser_linear_base.cpp.i
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_linear_base.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shrg.dir/src/graph_parser/parser_linear_base.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/graph_parser/parser_linear_base.cpp -o CMakeFiles/shrg.dir/src/graph_parser/parser_linear_base.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_linear_base.cpp -o CMakeFiles/shrg.dir/src/graph_parser/parser_linear_base.cpp.s
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_tree_base.cpp.o: CMakeFiles/shrg.dir/flags.make
-CMakeFiles/shrg.dir/src/graph_parser/parser_tree_base.cpp.o: /Users/yuangao/general_graph/parser/src/graph_parser/parser_tree_base.cpp
+CMakeFiles/shrg.dir/src/graph_parser/parser_tree_base.cpp.o: /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_tree_base.cpp
 CMakeFiles/shrg.dir/src/graph_parser/parser_tree_base.cpp.o: CMakeFiles/shrg.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/parser_tree_base.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/parser_tree_base.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/parser_tree_base.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/parser_tree_base.cpp.o -c /Users/yuangao/general_graph/parser/src/graph_parser/parser_tree_base.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/parser_tree_base.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/parser_tree_base.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/parser_tree_base.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/parser_tree_base.cpp.o -c /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_tree_base.cpp
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_tree_base.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shrg.dir/src/graph_parser/parser_tree_base.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/graph_parser/parser_tree_base.cpp > CMakeFiles/shrg.dir/src/graph_parser/parser_tree_base.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_tree_base.cpp > CMakeFiles/shrg.dir/src/graph_parser/parser_tree_base.cpp.i
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_tree_base.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shrg.dir/src/graph_parser/parser_tree_base.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/graph_parser/parser_tree_base.cpp -o CMakeFiles/shrg.dir/src/graph_parser/parser_tree_base.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_tree_base.cpp -o CMakeFiles/shrg.dir/src/graph_parser/parser_tree_base.cpp.s
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v1.cpp.o: CMakeFiles/shrg.dir/flags.make
-CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v1.cpp.o: /Users/yuangao/general_graph/parser/src/graph_parser/parser_tree_index_v1.cpp
+CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v1.cpp.o: /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_tree_index_v1.cpp
 CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v1.cpp.o: CMakeFiles/shrg.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v1.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v1.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v1.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v1.cpp.o -c /Users/yuangao/general_graph/parser/src/graph_parser/parser_tree_index_v1.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v1.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v1.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v1.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v1.cpp.o -c /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_tree_index_v1.cpp
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v1.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v1.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/graph_parser/parser_tree_index_v1.cpp > CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v1.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_tree_index_v1.cpp > CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v1.cpp.i
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v1.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v1.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/graph_parser/parser_tree_index_v1.cpp -o CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v1.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_tree_index_v1.cpp -o CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v1.cpp.s
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v2.cpp.o: CMakeFiles/shrg.dir/flags.make
-CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v2.cpp.o: /Users/yuangao/general_graph/parser/src/graph_parser/parser_tree_index_v2.cpp
+CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v2.cpp.o: /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_tree_index_v2.cpp
 CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v2.cpp.o: CMakeFiles/shrg.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v2.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v2.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v2.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v2.cpp.o -c /Users/yuangao/general_graph/parser/src/graph_parser/parser_tree_index_v2.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v2.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v2.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v2.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v2.cpp.o -c /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_tree_index_v2.cpp
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v2.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v2.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/graph_parser/parser_tree_index_v2.cpp > CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v2.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_tree_index_v2.cpp > CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v2.cpp.i
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v2.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v2.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/graph_parser/parser_tree_index_v2.cpp -o CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v2.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_tree_index_v2.cpp -o CMakeFiles/shrg.dir/src/graph_parser/parser_tree_index_v2.cpp.s
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v1.cpp.o: CMakeFiles/shrg.dir/flags.make
-CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v1.cpp.o: /Users/yuangao/general_graph/parser/src/graph_parser/parser_tree_v1.cpp
+CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v1.cpp.o: /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_tree_v1.cpp
 CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v1.cpp.o: CMakeFiles/shrg.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v1.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v1.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v1.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v1.cpp.o -c /Users/yuangao/general_graph/parser/src/graph_parser/parser_tree_v1.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v1.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v1.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v1.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v1.cpp.o -c /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_tree_v1.cpp
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v1.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v1.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/graph_parser/parser_tree_v1.cpp > CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v1.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_tree_v1.cpp > CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v1.cpp.i
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v1.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v1.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/graph_parser/parser_tree_v1.cpp -o CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v1.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_tree_v1.cpp -o CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v1.cpp.s
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v2.cpp.o: CMakeFiles/shrg.dir/flags.make
-CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v2.cpp.o: /Users/yuangao/general_graph/parser/src/graph_parser/parser_tree_v2.cpp
+CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v2.cpp.o: /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_tree_v2.cpp
 CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v2.cpp.o: CMakeFiles/shrg.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v2.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v2.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v2.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v2.cpp.o -c /Users/yuangao/general_graph/parser/src/graph_parser/parser_tree_v2.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v2.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v2.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v2.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v2.cpp.o -c /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_tree_v2.cpp
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v2.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v2.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/graph_parser/parser_tree_v2.cpp > CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v2.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_tree_v2.cpp > CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v2.cpp.i
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v2.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v2.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/graph_parser/parser_tree_v2.cpp -o CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v2.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_tree_v2.cpp -o CMakeFiles/shrg.dir/src/graph_parser/parser_tree_v2.cpp.s
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.o: CMakeFiles/shrg.dir/flags.make
-CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.o: /Users/yuangao/general_graph/parser/src/graph_parser/parser_utils.cpp
+CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.o: /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_utils.cpp
 CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.o: CMakeFiles/shrg.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.o -c /Users/yuangao/general_graph/parser/src/graph_parser/parser_utils.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.o -c /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_utils.cpp
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/graph_parser/parser_utils.cpp > CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_utils.cpp > CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.i
 
 CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/graph_parser/parser_utils.cpp -o CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/graph_parser/parser_utils.cpp -o CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.s
 
 CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.o: CMakeFiles/shrg.dir/flags.make
-CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.o: /Users/yuangao/general_graph/parser/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp
+CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.o: /Users/yuangao/graph_optimization/parser/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp
 CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.o: CMakeFiles/shrg.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.o -c /Users/yuangao/general_graph/parser/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.o -c /Users/yuangao/graph_optimization/parser/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp
 
 CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp > CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp > CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.i
 
 CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp -o CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp -o CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.s
 
 CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.o: CMakeFiles/shrg.dir/flags.make
-CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.o: /Users/yuangao/general_graph/parser/src/graph_parser/tokens.cpp
+CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.o: /Users/yuangao/graph_optimization/parser/src/graph_parser/tokens.cpp
 CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.o: CMakeFiles/shrg.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.o -c /Users/yuangao/general_graph/parser/src/graph_parser/tokens.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.o -c /Users/yuangao/graph_optimization/parser/src/graph_parser/tokens.cpp
 
 CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/graph_parser/tokens.cpp > CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/graph_parser/tokens.cpp > CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.i
 
 CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/graph_parser/tokens.cpp -o CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/graph_parser/tokens.cpp -o CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.s
 
 CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.o: CMakeFiles/shrg.dir/flags.make
-CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.o: /Users/yuangao/general_graph/parser/src/graph_parser/tree_decomposer.cpp
+CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.o: /Users/yuangao/graph_optimization/parser/src/graph_parser/tree_decomposer.cpp
 CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.o: CMakeFiles/shrg.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.o -c /Users/yuangao/general_graph/parser/src/graph_parser/tree_decomposer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.o -MF CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.o.d -o CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.o -c /Users/yuangao/graph_optimization/parser/src/graph_parser/tree_decomposer.cpp
 
 CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/general_graph/parser/src/graph_parser/tree_decomposer.cpp > CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/graph_parser/tree_decomposer.cpp > CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.i
 
 CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/general_graph/parser/src/graph_parser/tree_decomposer.cpp -o CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/graph_parser/tree_decomposer.cpp -o CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.s
+
+CMakeFiles/shrg.dir/src/ambiguity_metrics/derivation_entropy.cpp.o: CMakeFiles/shrg.dir/flags.make
+CMakeFiles/shrg.dir/src/ambiguity_metrics/derivation_entropy.cpp.o: /Users/yuangao/graph_optimization/parser/src/ambiguity_metrics/derivation_entropy.cpp
+CMakeFiles/shrg.dir/src/ambiguity_metrics/derivation_entropy.cpp.o: CMakeFiles/shrg.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/shrg.dir/src/ambiguity_metrics/derivation_entropy.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/ambiguity_metrics/derivation_entropy.cpp.o -MF CMakeFiles/shrg.dir/src/ambiguity_metrics/derivation_entropy.cpp.o.d -o CMakeFiles/shrg.dir/src/ambiguity_metrics/derivation_entropy.cpp.o -c /Users/yuangao/graph_optimization/parser/src/ambiguity_metrics/derivation_entropy.cpp
+
+CMakeFiles/shrg.dir/src/ambiguity_metrics/derivation_entropy.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shrg.dir/src/ambiguity_metrics/derivation_entropy.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/ambiguity_metrics/derivation_entropy.cpp > CMakeFiles/shrg.dir/src/ambiguity_metrics/derivation_entropy.cpp.i
+
+CMakeFiles/shrg.dir/src/ambiguity_metrics/derivation_entropy.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shrg.dir/src/ambiguity_metrics/derivation_entropy.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/ambiguity_metrics/derivation_entropy.cpp -o CMakeFiles/shrg.dir/src/ambiguity_metrics/derivation_entropy.cpp.s
+
+CMakeFiles/shrg.dir/src/ambiguity_metrics/expected_derivation_count.cpp.o: CMakeFiles/shrg.dir/flags.make
+CMakeFiles/shrg.dir/src/ambiguity_metrics/expected_derivation_count.cpp.o: /Users/yuangao/graph_optimization/parser/src/ambiguity_metrics/expected_derivation_count.cpp
+CMakeFiles/shrg.dir/src/ambiguity_metrics/expected_derivation_count.cpp.o: CMakeFiles/shrg.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/shrg.dir/src/ambiguity_metrics/expected_derivation_count.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/ambiguity_metrics/expected_derivation_count.cpp.o -MF CMakeFiles/shrg.dir/src/ambiguity_metrics/expected_derivation_count.cpp.o.d -o CMakeFiles/shrg.dir/src/ambiguity_metrics/expected_derivation_count.cpp.o -c /Users/yuangao/graph_optimization/parser/src/ambiguity_metrics/expected_derivation_count.cpp
+
+CMakeFiles/shrg.dir/src/ambiguity_metrics/expected_derivation_count.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shrg.dir/src/ambiguity_metrics/expected_derivation_count.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/ambiguity_metrics/expected_derivation_count.cpp > CMakeFiles/shrg.dir/src/ambiguity_metrics/expected_derivation_count.cpp.i
+
+CMakeFiles/shrg.dir/src/ambiguity_metrics/expected_derivation_count.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shrg.dir/src/ambiguity_metrics/expected_derivation_count.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/ambiguity_metrics/expected_derivation_count.cpp -o CMakeFiles/shrg.dir/src/ambiguity_metrics/expected_derivation_count.cpp.s
+
+CMakeFiles/shrg.dir/src/ambiguity_metrics/forest_complexity.cpp.o: CMakeFiles/shrg.dir/flags.make
+CMakeFiles/shrg.dir/src/ambiguity_metrics/forest_complexity.cpp.o: /Users/yuangao/graph_optimization/parser/src/ambiguity_metrics/forest_complexity.cpp
+CMakeFiles/shrg.dir/src/ambiguity_metrics/forest_complexity.cpp.o: CMakeFiles/shrg.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/shrg.dir/src/ambiguity_metrics/forest_complexity.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shrg.dir/src/ambiguity_metrics/forest_complexity.cpp.o -MF CMakeFiles/shrg.dir/src/ambiguity_metrics/forest_complexity.cpp.o.d -o CMakeFiles/shrg.dir/src/ambiguity_metrics/forest_complexity.cpp.o -c /Users/yuangao/graph_optimization/parser/src/ambiguity_metrics/forest_complexity.cpp
+
+CMakeFiles/shrg.dir/src/ambiguity_metrics/forest_complexity.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shrg.dir/src/ambiguity_metrics/forest_complexity.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuangao/graph_optimization/parser/src/ambiguity_metrics/forest_complexity.cpp > CMakeFiles/shrg.dir/src/ambiguity_metrics/forest_complexity.cpp.i
+
+CMakeFiles/shrg.dir/src/ambiguity_metrics/forest_complexity.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shrg.dir/src/ambiguity_metrics/forest_complexity.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuangao/graph_optimization/parser/src/ambiguity_metrics/forest_complexity.cpp -o CMakeFiles/shrg.dir/src/ambiguity_metrics/forest_complexity.cpp.s
 
 # Object files for target shrg
 shrg_OBJECTS = \
@@ -313,7 +355,10 @@ shrg_OBJECTS = \
 "CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.o" \
 "CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.o" \
 "CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.o" \
-"CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.o"
+"CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.o" \
+"CMakeFiles/shrg.dir/src/ambiguity_metrics/derivation_entropy.cpp.o" \
+"CMakeFiles/shrg.dir/src/ambiguity_metrics/expected_derivation_count.cpp.o" \
+"CMakeFiles/shrg.dir/src/ambiguity_metrics/forest_complexity.cpp.o"
 
 # External object files for target shrg
 shrg_EXTERNAL_OBJECTS =
@@ -334,9 +379,12 @@ libshrg.a: CMakeFiles/shrg.dir/src/graph_parser/parser_utils.cpp.o
 libshrg.a: CMakeFiles/shrg.dir/src/graph_parser/synchronous_hyperedge_replacement_grammar.cpp.o
 libshrg.a: CMakeFiles/shrg.dir/src/graph_parser/tokens.cpp.o
 libshrg.a: CMakeFiles/shrg.dir/src/graph_parser/tree_decomposer.cpp.o
+libshrg.a: CMakeFiles/shrg.dir/src/ambiguity_metrics/derivation_entropy.cpp.o
+libshrg.a: CMakeFiles/shrg.dir/src/ambiguity_metrics/expected_derivation_count.cpp.o
+libshrg.a: CMakeFiles/shrg.dir/src/ambiguity_metrics/forest_complexity.cpp.o
 libshrg.a: CMakeFiles/shrg.dir/build.make
 libshrg.a: CMakeFiles/shrg.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/yuangao/general_graph/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX static library libshrg.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/yuangao/graph_optimization/parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Linking CXX static library libshrg.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/shrg.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/shrg.dir/link.txt --verbose=$(VERBOSE)
 
@@ -349,6 +397,6 @@ CMakeFiles/shrg.dir/clean:
 .PHONY : CMakeFiles/shrg.dir/clean
 
 CMakeFiles/shrg.dir/depend:
-	cd /Users/yuangao/general_graph/parser/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/yuangao/general_graph/parser /Users/yuangao/general_graph/parser /Users/yuangao/general_graph/parser/build /Users/yuangao/general_graph/parser/build /Users/yuangao/general_graph/parser/build/CMakeFiles/shrg.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/yuangao/graph_optimization/parser/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/yuangao/graph_optimization/parser /Users/yuangao/graph_optimization/parser /Users/yuangao/graph_optimization/parser/build /Users/yuangao/graph_optimization/parser/build /Users/yuangao/graph_optimization/parser/build/CMakeFiles/shrg.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/shrg.dir/depend
 

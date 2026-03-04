@@ -1,4 +1,10 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/shrg.dir/src/ambiguity_metrics/derivation_entropy.cpp.o"
+  "CMakeFiles/shrg.dir/src/ambiguity_metrics/derivation_entropy.cpp.o.d"
+  "CMakeFiles/shrg.dir/src/ambiguity_metrics/expected_derivation_count.cpp.o"
+  "CMakeFiles/shrg.dir/src/ambiguity_metrics/expected_derivation_count.cpp.o.d"
+  "CMakeFiles/shrg.dir/src/ambiguity_metrics/forest_complexity.cpp.o"
+  "CMakeFiles/shrg.dir/src/ambiguity_metrics/forest_complexity.cpp.o.d"
   "CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.o"
   "CMakeFiles/shrg.dir/src/graph_parser/edsgraph.cpp.o.d"
   "CMakeFiles/shrg.dir/src/graph_parser/generator.cpp.o"

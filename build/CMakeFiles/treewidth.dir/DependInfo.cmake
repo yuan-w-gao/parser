@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/yuangao/general_graph/parser/src/treewidth.cpp" "CMakeFiles/treewidth.dir/src/treewidth.cpp.o" "gcc" "CMakeFiles/treewidth.dir/src/treewidth.cpp.o.d"
+  "/Users/yuangao/graph_optimization/parser/src/treewidth.cpp" "CMakeFiles/treewidth.dir/src/treewidth.cpp.o" "gcc" "CMakeFiles/treewidth.dir/src/treewidth.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

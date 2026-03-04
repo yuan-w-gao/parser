@@ -1,7 +1,7 @@
 {
 	"InstallScripts" : 
 	[
-		"/Users/yuangao/general_graph/parser/build/cmake_install.cmake"
+		"/Users/yuangao/graph_optimization/parser/build/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

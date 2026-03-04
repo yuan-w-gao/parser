@@ -7,6 +7,8 @@
 #include "extra_edge_set.hpp"
 #include "extra_edsgraph.hpp"
 #include "extra_shrg.hpp"
+#include "extra_ambiguity_metrics.hpp"
+#include "extra_em.hpp"
 #include "multi_threads_runner.hpp"
 
 using namespace pybind11::literals;
@@ -134,6 +136,7 @@ PYBIND11_MODULE(pyshrg, m) {
         .def_readonly("nonterminal_edges", &SHRG::nonterminal_edges)
         .def_readonly("external_nodes", &SHRG::external_nodes)
         .def_readonly("num_occurences", &SHRG::num_occurences)
+        .def_readwrite("log_rule_weight", &SHRG::log_rule_weight)
         .def_property_readonly("is_empty", LAMBDA_EXPR(SHRG, self.IsEmpty()))
         .def_property_readonly("size", LAMBDA_GET_SIZE(SHRG, cfg_rules))
         .def_property_readonly("edges", LAMBDA_EXPR(SHRG, self.fragment.edges))
@@ -237,7 +240,24 @@ PYBIND11_MODULE(pyshrg, m) {
         .def("find_best_derivation", &Context_FindBestDerivation)
         .def("release_memory", &Context::ReleaseMemory)
         .def("pool_size", &Context::PoolSize)
-        .def("get_item", &Context::GetChartItem, return_value_policy::reference);
+        .def("get_item", &Context::GetChartItem, return_value_policy::reference)
+        // Ambiguity metrics
+        .def("compute_inside_outside", &Context_ComputeInsideOutside,
+             "Compute inside-outside probabilities, returns log partition function")
+        .def("compute_entropy", &Context_ComputeEntropy,
+             "Compute derivation entropy (requires inside-outside to be computed)")
+        .def("compute_entropy_with_partition", &Context_ComputeEntropyWithPartition,
+             "Compute entropy with explicit log partition", "log_partition"_a)
+        .def("compute_derivation_count", &Context_ComputeDerivationCount,
+             "Compute expected number of derivations")
+        .def("compute_log_derivation_count", &Context_ComputeLogDerivationCount,
+             "Compute log of derivation count (for overflow safety)")
+        .def("compute_forest_stats", &Context_ComputeForestStats,
+             "Compute forest statistics (nodes, edges, depth, branching)")
+        .def("compute_all_metrics", &Context_ComputeAllMetrics,
+             "Compute all ambiguity metrics at once")
+        .def("get_log_partition", &Context_GetLogPartition,
+             "Get log partition function (inside probability at root)");
 
     class_<Manager>(m, "Manager") //
         .def_property_readonly("hrg_size", LAMBDA_GET_SIZE(Manager, grammars))
@@ -270,4 +290,133 @@ PYBIND11_MODULE(pyshrg, m) {
     class_<Runner>(m, "Runner") //
         .def(init<Manager &, bool>(), "manager"_a, "verbose"_a = false)
         .def("__call__", &Runner::Run);
+
+    // EM Result struct
+    class_<EMResult>(m, "EMResult")
+        .def_readonly("final_weights", &EMResult::final_weights)
+        .def_readonly("weight_history", &EMResult::weight_history)
+        .def_readonly("log_likelihoods", &EMResult::log_likelihoods)
+        .def_readonly("num_iterations", &EMResult::num_iterations)
+        .def_readonly("converged", &EMResult::converged)
+        .def_readonly("elapsed_time", &EMResult::elapsed_time);
+
+    // EM training functions (basic - re-parses every iteration)
+    m.def("run_em", &run_batch_em,
+          "Run batch EM training (basic version - re-parses every iteration)",
+          "manager"_a,
+          "convergence_threshold"_a = 1e-4,
+          "max_iterations"_a = 100,
+          "max_graphs"_a = -1,
+          "verbose"_a = true);
+
+    m.def("train_em_simple", &train_em_simple,
+          "Train EM and return final weights",
+          "manager"_a,
+          "convergence_threshold"_a = 1e-4,
+          "max_iterations"_a = 100,
+          "verbose"_a = true);
+
+    // ==========================================================================
+    // Optimized EM - forest caching + O(n log n) outside algorithm
+    // ==========================================================================
+
+    // GraphMetrics struct for profiling
+    class_<em::GraphMetrics>(m, "GraphMetrics")
+        .def_readonly("sentence_id", &em::GraphMetrics::sentence_id)
+        .def_readonly("node_count", &em::GraphMetrics::node_count)
+        .def_readonly("edge_count", &em::GraphMetrics::edge_count)
+        .def_readonly("forest_size", &em::GraphMetrics::forest_size)
+        .def_readonly("max_chain_length", &em::GraphMetrics::max_chain_length)
+        .def_readonly("max_children", &em::GraphMetrics::max_children)
+        .def_readonly("max_parents", &em::GraphMetrics::max_parents)
+        .def_readonly("parse_time_ms", &em::GraphMetrics::parse_time_ms)
+        .def_readonly("deep_copy_time_ms", &em::GraphMetrics::deep_copy_time_ms)
+        .def_readonly("reset_flags_time_ms", &em::GraphMetrics::reset_flags_time_ms)
+        .def_readonly("inside_time_ms", &em::GraphMetrics::inside_time_ms)
+        .def_readonly("outside_time_ms", &em::GraphMetrics::outside_time_ms)
+        .def_readonly("expected_count_time_ms", &em::GraphMetrics::expected_count_time_ms)
+        .def_readonly("total_em_time_ms", &em::GraphMetrics::total_em_time_ms);
+
+    // OptimizedEMResult struct
+    class_<OptimizedEMResult>(m, "OptimizedEMResult")
+        .def_readonly("final_weights", &OptimizedEMResult::final_weights)
+        .def_readonly("weight_history", &OptimizedEMResult::weight_history)
+        .def_readonly("log_likelihoods", &OptimizedEMResult::log_likelihoods)
+        .def_readonly("iteration_times", &OptimizedEMResult::iteration_times)
+        .def_readonly("num_iterations", &OptimizedEMResult::num_iterations)
+        .def_readonly("converged", &OptimizedEMResult::converged)
+        .def_readonly("total_time", &OptimizedEMResult::total_time)
+        .def_readonly("num_forests_cached", &OptimizedEMResult::num_forests_cached)
+        .def_readonly("graph_metrics", &OptimizedEMResult::graph_metrics);
+
+    // Optimized EM function
+    m.def("run_em_optimized", &run_em_optimized,
+          "Run optimized EM training with forest caching and O(n log n) outside algorithm.\n\n"
+          "This is significantly faster than run_em() because:\n"
+          "1. Parses graphs once and caches derivation forests\n"
+          "2. Uses optimized outside algorithm (O(n log n) vs O(chain^depth * n))\n"
+          "3. Uses persistent memory pool for forest storage\n",
+          "manager"_a,
+          "convergence_threshold"_a = 1e-4,
+          "max_iterations"_a = 100,
+          "output_dir"_a = "N",
+          "enable_profiling"_a = false,
+          "use_safe_mode"_a = false,
+          "timeout_seconds"_a = 5,
+          "skip_graphs"_a = std::vector<std::string>{},
+          "verbose"_a = true);
+
+    // OptimizedEMTrainer class for more control
+    class_<OptimizedEMTrainer>(m, "OptimizedEMTrainer")
+        .def(init<Manager&, double, const std::string&, int, const std::vector<std::string>&>(),
+             "Create an optimized EM trainer.\n\n"
+             "Args:\n"
+             "    manager: The Manager containing rules and graphs\n"
+             "    convergence_threshold: Stop when LL improvement < threshold\n"
+             "    output_dir: Directory for output files (\"N\" for none)\n"
+             "    timeout_seconds: Timeout for parsing each graph\n"
+             "    skip_graphs: List of sentence IDs to skip\n",
+             "manager"_a,
+             "convergence_threshold"_a = 1e-4,
+             "output_dir"_a = "N",
+             "timeout_seconds"_a = 5,
+             "skip_graphs"_a = std::vector<std::string>{})
+        .def("enable_profiling", &OptimizedEMTrainer::enable_profiling,
+             "Enable per-graph profiling metrics",
+             "enable"_a = true)
+        .def("run", &OptimizedEMTrainer::run,
+             "Run full EM training with forest caching",
+             "use_safe_mode"_a = false,
+             "verbose"_a = true)
+        .def("get_weights", &OptimizedEMTrainer::get_weights,
+             "Get current rule log-weights")
+        .def("set_weights", &OptimizedEMTrainer::set_weights,
+             "Set rule log-weights",
+             "weights"_a)
+        .def("run_validation", &OptimizedEMTrainer::run_validation,
+             "Run validation comparing original vs optimized outside algorithm")
+        .def("print_metrics_summary", &OptimizedEMTrainer::print_metrics_summary,
+             "Print profiling metrics summary")
+        .def("get_graph_metrics", &OptimizedEMTrainer::get_graph_metrics,
+             "Get per-graph profiling metrics");
+
+    // Safe graph index testing for MLE/neural training
+    class_<SafeGraphIndices>(m, "SafeGraphIndices")
+        .def_readonly("safe_indices", &SafeGraphIndices::safe_indices)
+        .def_readonly("safe_ids", &SafeGraphIndices::safe_ids)
+        .def_readonly("num_tested", &SafeGraphIndices::num_tested)
+        .def_readonly("num_safe", &SafeGraphIndices::num_safe)
+        .def_readonly("num_skipped", &SafeGraphIndices::num_skipped)
+        .def_readonly("num_oom", &SafeGraphIndices::num_oom)
+        .def_readonly("total_time", &SafeGraphIndices::total_time);
+
+    m.def("test_safe_graph_indices", &test_safe_graph_indices,
+          "Test which graphs are safe to parse using fork-based OOM protection.\n\n"
+          "Uses fork() to test each parse in a child process. If the child\n"
+          "crashes (OOM/timeout), the parent survives and marks that graph unsafe.\n\n"
+          "Returns indices of safe graphs. Caller then parses only those graphs.\n",
+          "manager"_a,
+          "timeout_seconds"_a = 10,
+          "max_graphs"_a = -1,
+          "verbose"_a = true);
 }

@@ -39,6 +39,7 @@ class EM : public EMBase {
     EM(RuleVector &shrg_rules, std::vector<EdsGraph> &graphs, Context *context, double threshold, std::string dir);
     EM(RuleVector &shrg_rules, std::vector<EdsGraph> &graphs, Context *context, double threshold, std::string dir, int timeout_seconds);
     EM(RuleVector &shrg_rules, std::vector<EdsGraph> &graphs, Context *context, double threshold, std::string dir, int timeout_seconds, const std::unordered_set<std::string>& skip_graphs);
+
     double computeInside(ChartItem *root);
     void computeOutsideNode(ChartItem *root, NodeLevelPQ &pq);
     void computeOutside(ChartItem *root);
@@ -113,6 +114,20 @@ class EM : public EMBase {
     bool validateOutsideImplementations(ChartItem* root, double tolerance = 1e-10);
     bool validateFullEMCycle(double tolerance = 1e-10);
     void runValidation();
+
+    // Results accessors (populated after run())
+    const std::vector<double>& getLogLikelihoodHistory() const { return ll_history_; }
+    const std::vector<double>& getIterationTimes() const { return iteration_times_; }
+    double getFinalLogLikelihood() const { return ll; }
+    int getNumIterations() const { return num_iterations_; }
+    bool hasConverged() const { return converged_; }
+
+private:
+    // Results storage
+    std::vector<double> ll_history_;
+    std::vector<double> iteration_times_;
+    int num_iterations_ = 0;
+    bool converged_ = false;
 };
 
 } // namespace em

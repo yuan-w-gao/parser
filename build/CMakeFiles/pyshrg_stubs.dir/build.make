@@ -53,10 +53,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/yuangao/general_graph/parser
+CMAKE_SOURCE_DIR = /Users/yuangao/graph_optimization/parser
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/yuangao/general_graph/parser/build
+CMAKE_BINARY_DIR = /Users/yuangao/graph_optimization/parser/build
 
 # Utility rule file for pyshrg_stubs.
 
@@ -85,6 +85,6 @@ CMakeFiles/pyshrg_stubs.dir/clean:
 .PHONY : CMakeFiles/pyshrg_stubs.dir/clean
 
 CMakeFiles/pyshrg_stubs.dir/depend:
-	cd /Users/yuangao/general_graph/parser/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/yuangao/general_graph/parser /Users/yuangao/general_graph/parser /Users/yuangao/general_graph/parser/build /Users/yuangao/general_graph/parser/build /Users/yuangao/general_graph/parser/build/CMakeFiles/pyshrg_stubs.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/yuangao/graph_optimization/parser/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/yuangao/graph_optimization/parser /Users/yuangao/graph_optimization/parser /Users/yuangao/graph_optimization/parser/build /Users/yuangao/graph_optimization/parser/build /Users/yuangao/graph_optimization/parser/build/CMakeFiles/pyshrg_stubs.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/pyshrg_stubs.dir/depend
 
