@@ -247,33 +247,30 @@ int main(int argc, char* argv[]) {
     std::string output_file = argv[4];
     std::string weight_mode = argv[5];
 
-    std::cout << "=== LexCxG Entropy DP Computation ===\n";
     std::cout << "Parser type: " << parser_type << "\n";
     std::cout << "Grammar: " << grammar_file << "\n";
     std::cout << "Graphs: " << graph_file << "\n";
     std::cout << "Output: " << output_file << "\n";
     std::cout << "Weight mode: " << weight_mode << "\n\n";
 
-    // Initialize the manager (from parser library)
+
     shrg::Manager* manager = &shrg::Manager::manager;
     manager->Allocate(1);
 
-    // Load grammars and graphs
+
     std::cout << "Loading grammars...\n";
     manager->LoadGrammars(grammar_file);
 
     std::cout << "Loading graphs...\n";
     manager->LoadGraphs(graph_file);
 
-    // Initialize parser context
-    shrg::Context* context = manager->contexts[0];
-    context->Init(parser_type, false, 100);  // parser_type, verbose=false, max_pool_size=100
 
-    // Create EM instance for tree building (only need addParentPointerOptimized and addRulePointer)
+    shrg::Context* context = manager->contexts[0];
+    context->Init(parser_type, false, 100);
+
     std::vector<shrg::SHRG*> shrg_rules = manager->shrg_rules;
     shrg::em::EM em_helper(shrg_rules, manager->edsgraphs, context, 1.0, "N", 5);
 
-    // Apply weights based on mode
     applyWeights(shrg_rules, weight_mode, em_helper);
 
     std::vector<EntropyDPResult> results;
@@ -297,7 +294,6 @@ int main(int argc, char* argv[]) {
         result.time_ms = 0.0;
         result.success = false;
 
-        // Parse the graph using Context API
         shrg::ParserError error = context->Parse(static_cast<int>(i));
 
         if (error != shrg::ParserError::kNone) {
@@ -311,15 +307,11 @@ int main(int argc, char* argv[]) {
             continue;
         }
 
-        // Build tree structure (children pointers) and add rule pointers
-        // NOTE: We need children populated for the DP to work
         em_helper.addParentPointerOptimized(root, 0);
         em_helper.addRulePointer(root);
 
-        // Time the DP computation
         auto start = std::chrono::high_resolution_clock::now();
 
-        // Compute entropy using bottom-up DP
         double log_Z, entropy;
         ComputePartitionAndEntropyDP(root, log_Z, entropy);
 
@@ -331,7 +323,6 @@ int main(int argc, char* argv[]) {
         result.time_ms = elapsed.count();
         result.success = true;
 
-        // Count OR-nodes (for diagnostics)
         std::unordered_set<shrg::ChartItem*> seen_or_nodes;
         std::function<void(shrg::ChartItem*)> countOrNodes = [&](shrg::ChartItem* node) {
             if (!node) return;

@@ -1,30 +1,3 @@
-/**
- * @file derivation_entropy.cpp
- * @brief Compute derivation entropy: H = log Z - sum_v γ(v) log w(v)
- *
- * Derivation entropy measures uncertainty over the distribution of derivations.
- *
- * Formula derivation:
- *   H = -sum_d p(d) log p(d)
- *     = log Z - sum_v γ(v) log w(v)
- *
- * where:
- *   - Z = partition function (sum of all derivation weights) = α_cycle(root)
- *   - γ(v) = expected count of item v under p(d)
- *   - w(v) = rule weight of item v
- *
- * Key insight for OR-nodes (next_ptr cycles):
- *   - α_cycle(v) = sum over all items in cycle of α_item(u)
- *   - α_item(v) = w(v) × ∏_{c ∈ children(v)} α_cycle(c)
- *   - β_cycle(v) = same for all items in cycle (contexts don't distinguish)
- *   - γ(v) = α_item(v) × β_cycle(v) / Z  (NOT α_cycle!)
- *
- * The stored log_inside_prob is α_cycle (shared by all items in cycle).
- * We must recompute α_item(v) = w(v) × ∏_c α_cycle(c) for each item.
- *
- * Higher entropy indicates more ambiguity in the derivation distribution.
- */
-
 #include "ambiguity_metrics/ambiguity_metrics.hpp"
 #include "graph_parser/parser_chart_item.hpp"
 
@@ -36,22 +9,6 @@ namespace lexcxg {
 
 namespace {
 
-/**
- * @brief Recursive helper for computing sum_v γ(v) * log w(v)
- *
- * Traverses the forest, computing the weighted log-weight sum.
- * Uses memoization to avoid recomputation.
- *
- * CRITICAL: For each item v, we need α_item(v), not α_cycle(v).
- *   - α_item(v) = w(v) × ∏_{c ∈ children(v)} α_cycle(c)
- *   - The stored log_inside_prob is α_cycle (same for all items in cycle)
- *   - We recompute α_item here using the rule weight and children's cycle insides
- *
- * @param node Current chart item (OR-node entry point)
- * @param log_Z Log partition function
- * @param sum_gamma_log_w Accumulator for sum of γ(v) * log w(v)
- * @param visited Set of visited items to avoid recomputation
- */
 void ComputeGammaLogWeightSum(
     shrg::ChartItem* node,
     double log_Z,
@@ -65,7 +22,6 @@ void ComputeGammaLogWeightSum(
     shrg::ChartItem* ptr = node;
     shrg::ChartItem* start = node;
 
-    // Iterate through all alternatives in the next_ptr cycle (OR-node)
     do {
         if (visited.count(ptr)) {
             ptr = ptr->next_ptr;
@@ -73,39 +29,27 @@ void ComputeGammaLogWeightSum(
         }
         visited.insert(ptr);
 
-        // Get log weight of this item: log w(v)
-        double log_w = 0.0;  // default: w = 1, log w = 0
+        double log_w = 0.0;
         if (ptr->rule_ptr) {
             log_w = ptr->rule_ptr->log_rule_weight;
         }
-
-        // Compute α_item(v) = w(v) × ∏_{c ∈ children} α_cycle(c)
-        // In log space: log α_item = log w + sum of children's log_inside_prob
-        // Note: children's log_inside_prob is their cycle inside, which is correct
         double log_alpha_item = log_w;
         for (shrg::ChartItem* child : ptr->children) {
             if (IsValidProb(child->log_inside_prob)) {
                 log_alpha_item += child->log_inside_prob;
             }
         }
-
-        // β_cycle(v) is the same for all items in a cycle
-        // (contexts don't distinguish which item produced the subgraph)
         double log_outside = ptr->log_outside_prob;
 
-        // Compute γ(v) = α_item(v) × β_cycle(v) / Z
-        // In log space: log γ = log_alpha_item + log_outside - log_Z
         if (IsValidProb(log_alpha_item) && IsValidProb(log_outside)) {
             double log_gamma = log_alpha_item + log_outside - log_Z;
             double gamma = std::exp(log_gamma);
 
-            // Add γ(v) * log w(v) to the sum
             if (gamma > 0 && std::isfinite(gamma) && std::isfinite(log_w)) {
                 sum_gamma_log_w += gamma * log_w;
             }
         }
 
-        // Recurse to children (child OR-nodes)
         for (shrg::ChartItem* child : ptr->children) {
             ComputeGammaLogWeightSum(child, log_Z, sum_gamma_log_w, visited);
         }
@@ -114,15 +58,13 @@ void ComputeGammaLogWeightSum(
     } while (ptr && ptr != start);
 }
 
-} // anonymous namespace
+}
 
 double ComputeDerivationEntropy(shrg::ChartItem* root, double log_partition, bool debug) {
     if (!root) {
         return 0.0;
     }
 
-    // log_Z = log partition function = log(sum of all derivation weights)
-    // This equals the inside probability at the root OR-node
     double log_Z = log_partition;
     if (!IsValidProb(log_Z)) {
         log_Z = root->log_inside_prob;
@@ -137,16 +79,14 @@ double ComputeDerivationEntropy(shrg::ChartItem* root, double log_partition, boo
 
     if (!IsValidProb(log_Z)) {
         if (debug) std::cerr << "[DEBUG] Invalid log_Z, returning 0\n";
-        return 0.0;  // Can't compute entropy without valid partition function
+        return 0.0;
     }
 
-    // Compute sum_n γ(n) * log w(n)
     double sum_gamma_log_w = 0.0;
     std::unordered_set<shrg::ChartItem*> visited;
 
     ComputeGammaLogWeightSum(root, log_Z, sum_gamma_log_w, visited);
 
-    // H = log Z - sum_n γ(n) * log w(n)
     double entropy = log_Z - sum_gamma_log_w;
 
     if (debug) {
@@ -156,7 +96,6 @@ double ComputeDerivationEntropy(shrg::ChartItem* root, double log_partition, boo
                   << " visited=" << visited.size() << "\n";
     }
 
-    // Entropy should be non-negative (may be slightly negative due to numerical errors)
     return std::max(0.0, entropy);
 }
 
@@ -164,4 +103,4 @@ double ComputeDerivationEntropy(shrg::ChartItem* root, double log_partition) {
     return ComputeDerivationEntropy(root, log_partition, false);
 }
 
-} // namespace lexcxg
+}
