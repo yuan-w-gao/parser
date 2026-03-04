@@ -55,6 +55,41 @@ double ComputeDerivationEntropy(::shrg::ChartItem* root, double log_partition);
 double ComputeDerivationEntropy(::shrg::ChartItem* root, double log_partition, bool debug);
 
 /**
+ * @brief Compute derivation entropy using bottom-up DP (no outside pass needed)
+ *
+ * This implements the recursive entropy formula:
+ *   H(v) = log Z(v) - sum_a r(a|v) log w(a) + sum_a r(a|v) sum_c H(c)
+ *
+ * Advantages over inside-outside method:
+ *   - Single bottom-up pass (no outside computation needed)
+ *   - Naturally handles sharing via memoization
+ *   - More numerically stable
+ *
+ * IMPORTANT: Requires children pointers to be populated first.
+ * Use PopulateChildren() or ensure addParentPointer() has been called.
+ *
+ * @param root Root of the derivation forest
+ * @return Entropy in nats (natural log)
+ */
+double ComputeDerivationEntropyDP(::shrg::ChartItem* root);
+double ComputeDerivationEntropyDP(::shrg::ChartItem* root, bool debug);
+
+/**
+ * @brief Compute both partition function and entropy via DP
+ *
+ * Useful when you need both values, avoiding redundant computation.
+ *
+ * @param root Root of the derivation forest
+ * @param out_log_Z Output: log partition function
+ * @param out_entropy Output: derivation entropy
+ */
+void ComputePartitionAndEntropyDP(
+    ::shrg::ChartItem* root,
+    double& out_log_Z,
+    double& out_entropy
+);
+
+/**
  * @brief Compute expected derivation count via DP on forest structure
  *
  * For each node: E[count] = sum over alternatives of product of child counts

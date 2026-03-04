@@ -266,5 +266,82 @@ message(STATUS "  run_em_viterbi             - Legacy Viterbi EM algorithm")
 message(STATUS "  run_online_em              - Legacy Online EM algorithm")
 
 message(STATUS "")
+<<<<<<< Updated upstream
 message(STATUS "Evaluation targets:")
 message(STATUS "  run_comprehensive_evaluation - Comprehensive evaluation runner")
+=======
+message(STATUS "Utility targets:")
+if(TARGET generate)
+    message(STATUS "  generate                   - Graph generation")
+endif()
+if(TARGET evaluate)
+    message(STATUS "  evaluate                   - Evaluation utilities")
+endif()
+if(TARGET add_original_sentences)
+    message(STATUS "  add_original_sentences     - Add original sentences")
+endif()
+if(TARGET get_lemma_sentences)
+    message(STATUS "  get_lemma_sentences        - Get lemma sentences")
+endif()
+
+message(STATUS "")
+message(STATUS "Parser tools:")
+if(TARGET shrg_parser)
+    message(STATUS "  shrg_parser               - SHRG parser tool")
+endif()
+if(TARGET check_parser)
+    message(STATUS "  check_parser              - Parser checker")
+endif()
+if(TARGET treewidth)
+    message(STATUS "  treewidth                 - Tree width computation")
+endif()
+if(TARGET manager_test)
+    message(STATUS "  manager_test              - Manager testing tool")
+endif()
+
+message(STATUS "===============================================")
+
+# Print library information
+message(STATUS "Libraries:")
+message(STATUS "  shrg                       - Core SHRG graph parser")
+message(STATUS "  em_legacy                  - Legacy EM framework")
+message(STATUS "===============================================")
+
+# Helpful build commands
+message(STATUS "Build commands:")
+message(STATUS "  cmake --build . --target evaluate               # Build evaluation tool")
+message(STATUS "  cmake --build . --target generate               # Build generation tool")
+message(STATUS "  cmake --build . --target run_batch_em           # Build batch EM runner")
+message(STATUS "  cmake --build . --target all                    # Build all targets")
+message(STATUS "===============================================")
+add_executable(get_deriv src/get_derivation_edges.cpp)
+target_link_libraries(get_deriv PRIVATE em_legacy shrg)
+
+#add_executable(get_deriv_rule_indices src/get_deriv_rule_indices.cpp)
+#target_link_libraries(get_deriv_rule_indices PRIVATE em_legacy shrg)add_executable(count_node src/count_nodes.cpp)
+
+# ===== AMBIGUITY METRICS LIBRARY =====
+
+# Ambiguity metrics library for computing derivation entropy, expected count, and forest complexity
+file(GLOB AMBIGUITY_METRICS_SOURCES "src/ambiguity_metrics/*.cpp")
+add_library(ambiguity_metrics STATIC ${AMBIGUITY_METRICS_SOURCES})
+target_include_directories(ambiguity_metrics PUBLIC ${PROJECT_SOURCE_DIR}/src)
+target_link_libraries(ambiguity_metrics PRIVATE shrg)
+set_target_properties(ambiguity_metrics PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+
+# Ambiguity metrics computation executable
+add_executable(compute_ambiguity_metrics src/compute_ambiguity_metrics.cpp)
+target_link_libraries(compute_ambiguity_metrics PRIVATE ambiguity_metrics em_legacy shrg)
+
+# Derivation count executable (fast, no parents_sib computation)
+add_executable(count_derivations src/count_derivations.cpp)
+target_link_libraries(count_derivations PRIVATE ambiguity_metrics em_legacy shrg)
+
+# Baseline computation executable (uniform distribution baseline for F1 and BLEU)
+add_executable(compute_baseline src/compute_baseline.cpp)
+target_link_libraries(compute_baseline PRIVATE em_legacy shrg)
+
+# Entropy DP computation executable (bottom-up DP, no outside pass needed)
+add_executable(compute_entropy_dp src/compute_entropy_dp.cpp)
+target_link_libraries(compute_entropy_dp PRIVATE ambiguity_metrics em_legacy shrg)
+>>>>>>> Stashed changes
