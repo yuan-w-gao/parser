@@ -10,6 +10,7 @@
 #include "../graph_parser/parser_chart_item.hpp"
 #include "em_utils.hpp"
 #include "../graph_parser/parser_utils.hpp"
+#include <optional>
 #include <random>
 #include <set>
 

@@ -364,7 +364,8 @@ PYBIND11_MODULE(pyshrg, m) {
           "use_safe_mode"_a = false,
           "timeout_seconds"_a = 5,
           "skip_graphs"_a = std::vector<std::string>{},
-          "verbose"_a = true);
+          "verbose"_a = true,
+          "parser_verbose"_a = false);
 
     // OptimizedEMTrainer class for more control
     class_<OptimizedEMTrainer>(m, "OptimizedEMTrainer")

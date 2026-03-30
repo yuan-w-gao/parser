@@ -79,6 +79,14 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/src/em_framework_v2")
     target_include_directories(em_framework_v2 PUBLIC src/em_framework_v2)
 endif()
 
+# Forest caching library (for skipping re-parsing across runs)
+add_library(forest_cache STATIC
+    "src/forest_cache.cpp"
+)
+target_link_libraries(forest_cache PRIVATE shrg)
+target_include_directories(forest_cache PUBLIC ${PROJECT_SOURCE_DIR}/src)
+set_target_properties(forest_cache PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+
 # Legacy EM framework (for compatibility with existing utilities)
 file(GLOB EM_LEGACY_SOURCES
     "src/em_framework/find_derivations.cpp"
@@ -94,7 +102,7 @@ add_library(em_legacy STATIC
     ${EM_LEGACY_SOURCES}
     "src/manager.cpp"
 )
-target_link_libraries(em_legacy PRIVATE shrg)
+target_link_libraries(em_legacy PRIVATE shrg forest_cache)
 
 # ===== EM FRAMEWORK V2 EXECUTABLES =====
 # Only build if em_framework_v2 exists
@@ -234,9 +242,9 @@ if(USE_PYTHON)
         # Python binding library
         add_library(pyshrg SHARED ${PYTHON_SOURCES})
         if(TARGET em_framework_v2)
-            target_link_libraries(pyshrg PRIVATE em_framework_v2 em_legacy shrg ${Python_LIBRARIES})
+            target_link_libraries(pyshrg PRIVATE em_framework_v2 em_legacy forest_cache shrg ${Python_LIBRARIES})
         else()
-            target_link_libraries(pyshrg PRIVATE em_legacy shrg ${Python_LIBRARIES})
+            target_link_libraries(pyshrg PRIVATE em_legacy forest_cache shrg ${Python_LIBRARIES})
         endif()
         target_include_directories(pyshrg PRIVATE ${Python_INCLUDE_DIRS})
         target_include_directories(pyshrg PRIVATE ${PROJECT_SOURCE_DIR}/third-party/pybind11/include)
@@ -268,10 +276,6 @@ message(STATUS "  run_em_viterbi             - Legacy Viterbi EM algorithm")
 message(STATUS "  run_online_em              - Legacy Online EM algorithm")
 
 message(STATUS "")
-<<<<<<< Updated upstream
-message(STATUS "Evaluation targets:")
-message(STATUS "  run_comprehensive_evaluation - Comprehensive evaluation runner")
-=======
 message(STATUS "Utility targets:")
 if(TARGET generate)
     message(STATUS "  generate                   - Graph generation")
@@ -346,4 +350,11 @@ target_link_libraries(compute_baseline PRIVATE em_legacy shrg)
 # Entropy DP computation executable (bottom-up DP, no outside pass needed)
 add_executable(compute_entropy_dp src/compute_entropy_dp.cpp)
 target_link_libraries(compute_entropy_dp PRIVATE ambiguity_metrics em_legacy shrg)
->>>>>>> Stashed changes
+
+# Comprehensive evaluation executable (entropy + BLEU + F1 in one pass)
+add_executable(comprehensive_eval src/comprehensive_eval.cpp)
+target_link_libraries(comprehensive_eval PRIVATE ambiguity_metrics em_legacy forest_cache shrg)
+
+# Forest cache test executable
+add_executable(test_forest_cache src/test_forest_cache.cpp)
+target_link_libraries(test_forest_cache PRIVATE em_legacy forest_cache shrg)

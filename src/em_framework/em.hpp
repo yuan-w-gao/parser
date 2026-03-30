@@ -7,7 +7,9 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <chrono>
+#include <memory>
 #include "../manager.hpp"
+#include "../forest_cache.hpp"
 #include "em_base.hpp"
 #include "em_types.hpp"
 #include "em_utils.hpp"
@@ -39,6 +41,13 @@ class EM : public EMBase {
     EM(RuleVector &shrg_rules, std::vector<EdsGraph> &graphs, Context *context, double threshold, std::string dir);
     EM(RuleVector &shrg_rules, std::vector<EdsGraph> &graphs, Context *context, double threshold, std::string dir, int timeout_seconds);
     EM(RuleVector &shrg_rules, std::vector<EdsGraph> &graphs, Context *context, double threshold, std::string dir, int timeout_seconds, const std::unordered_set<std::string>& skip_graphs);
+
+    // Enable forest caching
+    void enableCaching(const std::string& cache_dir);
+
+    // Get cache statistics
+    size_t getCacheHits() const;
+    size_t getCacheMisses() const;
 
     double computeInside(ChartItem *root);
     void computeOutsideNode(ChartItem *root, NodeLevelPQ &pq);
@@ -121,6 +130,11 @@ class EM : public EMBase {
     double getFinalLogLikelihood() const { return ll; }
     int getNumIterations() const { return num_iterations_; }
     bool hasConverged() const { return converged_; }
+    size_t getNumCachedForests() const { return num_cached_forests_; }
+
+    // Verbose control
+    void setVerbose(bool verbose) { verbose_ = verbose; }
+    bool isVerbose() const { return verbose_; }
 
 private:
     // Results storage
@@ -128,6 +142,19 @@ private:
     std::vector<double> iteration_times_;
     int num_iterations_ = 0;
     bool converged_ = false;
+    size_t num_cached_forests_ = 0;
+    bool verbose_ = true;
+
+    // Forest caching support
+    std::unique_ptr<forest_cache::ForestCache> cache_;
+    bool caching_enabled_ = false;
+    uint32_t grammar_hash_ = 0;
+
+    // Helper to compute grammar hash for cache validation
+    uint32_t computeGrammarHash() const;
+
+    // Helper to compute graph hash for cache validation
+    uint32_t computeGraphHash(const EdsGraph& graph) const;
 };
 
 } // namespace em

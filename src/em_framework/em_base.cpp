@@ -261,9 +261,11 @@ void EMBase::addRulePointer(ChartItem *root) {
 
     ChartItem *ptr = root;
     do {
-        auto grammar_index = ptr->attrs_ptr->grammar_ptr->best_cfg_ptr->shrg_index;
-        ptr->rule_ptr = shrg_rules[grammar_index];
-        ptr->shrg_index = grammar_index;
+        // Use the grammar pointer directly instead of indexing by shrg_index.
+        // This ensures consistent indexing with grammar objects (0 to hrg_size-1)
+        // rather than shrg_indices (0 to shrg_size-1) which may be larger.
+        ptr->rule_ptr = const_cast<SHRG*>(ptr->attrs_ptr->grammar_ptr);
+        ptr->shrg_index = ptr->attrs_ptr->grammar_ptr->best_cfg_ptr->shrg_index;
 
         ptr->rule_visited = VISITED;
         for (ChartItem *child : ptr->children) {

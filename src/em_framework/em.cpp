@@ -78,6 +78,65 @@ void EM::initializeWeights() {
     setInitialWeights(rule_dict);
 }
 
+// ============================================================================
+// Forest Caching Support
+// ============================================================================
+
+void EM::enableCaching(const std::string& cache_dir) {
+    if (cache_dir.empty()) {
+        caching_enabled_ = false;
+        cache_.reset();
+        return;
+    }
+
+    cache_ = std::make_unique<forest_cache::ForestCache>(cache_dir);
+    grammar_hash_ = computeGrammarHash();
+    cache_->set_grammar_hash(grammar_hash_);
+    caching_enabled_ = true;
+
+    if (verbose_) {
+        std::cout << "Forest caching enabled: " << cache_dir
+                  << " (grammar hash: " << std::hex << grammar_hash_ << std::dec << ")\n";
+    }
+}
+
+size_t EM::getCacheHits() const {
+    return cache_ ? cache_->cache_hits() : 0;
+}
+
+size_t EM::getCacheMisses() const {
+    return cache_ ? cache_->cache_misses() : 0;
+}
+
+uint32_t EM::computeGrammarHash() const {
+    // Hash all rule contents
+    std::string content;
+    for (const auto* rule : shrg_rules) {
+        if (rule) {
+            content += std::to_string(rule->label_hash);
+            content += ":";
+            content += std::to_string(rule->terminal_edges.size());
+            content += ";";
+        }
+    }
+    return forest_cache::ForestCache::compute_hash(content);
+}
+
+uint32_t EM::computeGraphHash(const EdsGraph& graph) const {
+    // Hash graph content
+    std::string content = graph.sentence_id;
+    content += ":";
+    content += std::to_string(graph.nodes.size());
+    content += ":";
+    content += std::to_string(graph.edges.size());
+    // Add edge labels for more specific hash
+    for (const auto& edge : graph.edges) {
+        content += std::to_string(edge.label);
+        content += ",";
+    }
+    return forest_cache::ForestCache::compute_hash(content);
+}
+
 double EM::computeInside(ChartItem *root){
     if(root->inside_visited_status == VISITED){
         return root->log_inside_prob;
@@ -852,18 +911,25 @@ void EM::run() {
     std::vector<CachedForest> cached_forests;
     cached_forests.reserve(training_size);
 
+    size_t cache_hit_count = 0;
+    size_t cache_miss_count = 0;
+
     for (int i = 0; i < training_size; i++) {
         EdsGraph& graph = graphs[i];
 
         // Skip graphs in the skip list
         if (!skip_graphs_.empty() && skip_graphs_.count(graph.sentence_id)) {
-            std::cout << "\r[parsing] SKIPPING " << graph.sentence_id
-                      << " (" << (i + 1) << "/" << training_size << ")" << std::flush;
+            if (verbose_) {
+                std::cout << "\r[parsing] SKIPPING " << graph.sentence_id
+                          << " (" << (i + 1) << "/" << training_size << ")" << std::flush;
+            }
             continue;
         }
 
-        std::cout << "\r[parsing] " << graph.sentence_id
-                  << " (" << (i + 1) << "/" << training_size << ")" << std::flush;
+        if (verbose_) {
+            std::cout << "\r[parsing] " << graph.sentence_id
+                      << " (" << (i + 1) << "/" << training_size << ")" << std::flush;
+        }
 
         // Start profiling for this graph
         GraphMetrics metrics;
@@ -871,6 +937,33 @@ void EM::run() {
             metrics.sentence_id = graph.sentence_id;
             metrics.node_count = graph.nodes.size();
             metrics.edge_count = graph.edges.size();
+        }
+
+        // Try to load from cache first
+        ChartItem* persistent_root = nullptr;
+        uint32_t graph_hash = 0;
+
+        if (caching_enabled_ && cache_) {
+            graph_hash = computeGraphHash(graph);
+            persistent_root = cache_->load(graph.sentence_id, graph_hash, persistent_pool_);
+            if (persistent_root) {
+                cache_hit_count++;
+                // Re-link rule pointers on the loaded forest
+                addRulePointer(persistent_root);
+
+                if (profiling_enabled_) {
+                    computeForestMetrics(persistent_root, metrics);
+                }
+
+                size_t metrics_idx = graph_metrics_.size();
+                if (profiling_enabled_) {
+                    graph_metrics_.push_back(metrics);
+                }
+
+                cached_forests.push_back({persistent_root, graph.sentence_id, i, metrics_idx});
+                continue;  // Skip parsing, use cached forest
+            }
+            cache_miss_count++;
         }
 
         auto parse_start = std::chrono::high_resolution_clock::now();
@@ -888,7 +981,7 @@ void EM::run() {
 
             // Deep copy to persistent storage before parser clears its pool
             auto deep_copy_start = std::chrono::high_resolution_clock::now();
-            ChartItem* persistent_root = deepCopyDerivationForest(root, persistent_pool_);
+            persistent_root = deepCopyDerivationForest(root, persistent_pool_);
             auto deep_copy_end = std::chrono::high_resolution_clock::now();
 
             if (profiling_enabled_) {
@@ -897,6 +990,14 @@ void EM::run() {
 
             // Re-link rule pointers on the persistent copy
             addRulePointer(persistent_root);
+
+            // Save to cache
+            if (caching_enabled_ && cache_ && persistent_root) {
+                if (graph_hash == 0) {
+                    graph_hash = computeGraphHash(graph);
+                }
+                cache_->save(graph.sentence_id, graph_hash, persistent_root);
+            }
 
             // Compute forest metrics for profiling
             if (profiling_enabled_) {
@@ -917,17 +1018,37 @@ void EM::run() {
 
     t2 = clock();
     double parse_time = (double)(t2 - t1) / CLOCKS_PER_SEC;
-    std::cout << "\nParsing complete: " << cached_forests.size() << " forests cached in "
-              << parse_time << " seconds\n\n";
+    if (verbose_) {
+        std::cout << "\nParsing complete: " << cached_forests.size() << " forests cached in "
+                  << parse_time << " seconds";
+        if (caching_enabled_) {
+            std::cout << " (cache hits: " << cache_hit_count
+                      << ", misses: " << cache_miss_count << ")";
+        }
+        std::cout << "\n\n";
+    }
 
     // Write parse-phase metrics if profiling enabled
     if (profiling_enabled_ && !(output_dir == "N")) {
         writeMetricsToCSV(output_dir + "parse_metrics.csv");
-        std::cout << "Parse metrics written to " << output_dir << "parse_metrics.csv\n";
+        if (verbose_) {
+            std::cout << "Parse metrics written to " << output_dir << "parse_metrics.csv\n";
+        }
     }
 
     // ========== Phase 2: Run EM iterations on cached forests ==========
-    std::cout << "Phase 2: Running EM iterations...\n";
+    if (verbose_) {
+        std::cout << "Phase 2: Running EM iterations...\n";
+    }
+
+    // Scale convergence threshold by number of cached forests
+    // (threshold is per-graph, e.g., 0.01 means converge when improvement < 0.01 * num_graphs)
+    double scaled_threshold = threshold * cached_forests.size();
+    if (verbose_) {
+        std::cout << "  (convergence threshold: " << std::fixed << std::setprecision(2)
+                  << scaled_threshold << " = " << threshold << " * "
+                  << cached_forests.size() << " graphs)\n";
+    }
 
     int iteration = 0;
     ll = 0;
@@ -969,8 +1090,10 @@ void EM::run() {
         for (size_t i = 0; i < cached_forests.size(); i++) {
             auto& cf = cached_forests[i];
 
-            std::cout << "\r[iter " << iteration << "] " << cf.sentence_id
-                      << " (" << (i + 1) << "/" << cached_forests.size() << ")" << std::flush;
+            if (verbose_) {
+                std::cout << "\r[iter " << iteration << "] " << cf.sentence_id
+                          << " (" << (i + 1) << "/" << cached_forests.size() << ")" << std::flush;
+            }
 
             if (profiling_enabled_ && cf.metrics_index < graph_metrics_.size()) {
                 auto& metrics = graph_metrics_[cf.metrics_index];
@@ -1004,7 +1127,9 @@ void EM::run() {
                 history_graph_ll[cf.original_index].push_back(pw);
             }
         }
-        std::cout << std::endl;
+        if (verbose_) {
+            std::cout << std::endl;
+        }
 
         updateEM();
 
@@ -1017,9 +1142,11 @@ void EM::run() {
         double time_diff = (double)(t2 - t1) / CLOCKS_PER_SEC;
         times.push_back(time_diff);
 
-        std::cout << "iteration: " << iteration
-                  << "\nlog likelihood: " << ll
-                  << ", in " << time_diff << " seconds \n\n";
+        if (verbose_) {
+            std::cout << "iteration: " << iteration
+                      << "\nlog likelihood: " << ll
+                      << ", in " << time_diff << " seconds \n\n";
+        }
 
         lls.push_back(ll);
 
@@ -1031,18 +1158,29 @@ void EM::run() {
         }
 
         iteration++;
-    } while (!converged());
+    } while (std::abs(ll - prev_ll) > scaled_threshold);  // Use scaled threshold
 
     // Write final metrics with EM timing included
     if (profiling_enabled_ && !(output_dir == "N")) {
         writeMetricsToCSV(output_dir + "em_metrics.csv");
-        std::cout << "\nFinal metrics written to " << output_dir << "em_metrics.csv\n";
-        printMetricsSummary();
+        if (verbose_) {
+            std::cout << "\nFinal metrics written to " << output_dir << "em_metrics.csv\n";
+            printMetricsSummary();
+        }
     }
+
+    // Populate member variables for Python binding access
+    ll_history_ = lls;
+    iteration_times_ = times;
+    num_iterations_ = iteration;
+    converged_ = (std::abs(ll - prev_ll) <= scaled_threshold);  // Use scaled threshold
+    num_cached_forests_ = cached_forests.size();
 }
 
 void EM::run_safe() {
-    std::cout << "Training with cached derivation forests (safe mode)...\n";
+    if (verbose_) {
+        std::cout << "Training with cached derivation forests (safe mode)...\n";
+    }
     clock_t t1, t2;
     unsigned long training_size = graphs.size();
     double initial_mem = getMemoryUsageMB();
@@ -1053,8 +1191,10 @@ void EM::run_safe() {
     }
 
     // ========== Phase 1: Parse with fork-based protection ==========
-    std::cout << "Phase 1: Parsing and caching derivation forests...\n";
-    std::cout << "  (fork safety: timeout=" << time_out_in_seconds << "s per graph)\n";
+    if (verbose_) {
+        std::cout << "Phase 1: Parsing and caching derivation forests...\n";
+        std::cout << "  (fork safety: timeout=" << time_out_in_seconds << "s per graph)\n";
+    }
     t1 = clock();
 
     struct CachedForest {
@@ -1066,6 +1206,8 @@ void EM::run_safe() {
     std::vector<CachedForest> cached_forests;
     cached_forests.reserve(training_size);
     int skipped_count = 0;
+    size_t cache_hit_count = 0;
+    size_t cache_miss_count = 0;
 
     for (int i = 0; i < training_size; i++) {
         EdsGraph& graph = graphs[i];
@@ -1074,11 +1216,41 @@ void EM::run_safe() {
             continue;
         }
 
+        // Try to load from cache first (skip fork test if cached)
+        uint32_t graph_hash = 0;
+        if (caching_enabled_ && cache_) {
+            graph_hash = computeGraphHash(graph);
+            ChartItem* cached_root = cache_->load(graph.sentence_id, graph_hash, persistent_pool_);
+            if (cached_root) {
+                cache_hit_count++;
+                addRulePointer(cached_root);
+
+                GraphMetrics metrics;
+                if (profiling_enabled_) {
+                    metrics.sentence_id = graph.sentence_id;
+                    metrics.node_count = graph.nodes.size();
+                    metrics.edge_count = graph.edges.size();
+                    computeForestMetrics(cached_root, metrics);
+                }
+
+                size_t metrics_idx = graph_metrics_.size();
+                if (profiling_enabled_) {
+                    graph_metrics_.push_back(metrics);
+                }
+
+                cached_forests.push_back({cached_root, graph.sentence_id, i, metrics_idx});
+                continue;  // Skip fork test and parsing
+            }
+            cache_miss_count++;
+        }
+
         double current_mem = getMemoryUsageMB();
-        std::cout << "\r[parsing] " << graph.sentence_id
-                  << " (" << (i + 1) << "/" << training_size << ")"
-                  << " [mem: " << std::fixed << std::setprecision(0) << current_mem << "MB"
-                  << ", cached: " << cached_forests.size() << "]" << std::flush;
+        if (verbose_) {
+            std::cout << "\r[parsing] " << graph.sentence_id
+                      << " (" << (i + 1) << "/" << training_size << ")"
+                      << " [mem: " << std::fixed << std::setprecision(0) << current_mem << "MB"
+                      << ", cached: " << cached_forests.size() << "]" << std::flush;
+        }
 
         // Fork a child to test if parsing is safe
         pid_t pid = fork();
@@ -1117,7 +1289,9 @@ void EM::run_safe() {
                 } else {
                     reason = "parse failed";
                 }
-                std::cout << "\n  [SKIP] " << graph.sentence_id << " - " << reason << "\n";
+                if (verbose_) {
+                    std::cout << "\n  [SKIP] " << graph.sentence_id << " - " << reason << "\n";
+                }
                 skipped_count++;
                 continue;
             }
@@ -1154,6 +1328,14 @@ void EM::run_safe() {
 
             addRulePointer(persistent_root);
 
+            // Save to cache
+            if (caching_enabled_ && cache_ && persistent_root) {
+                if (graph_hash == 0) {
+                    graph_hash = computeGraphHash(graph);
+                }
+                cache_->save(graph.sentence_id, graph_hash, persistent_root);
+            }
+
             if (profiling_enabled_) {
                 computeForestMetrics(persistent_root, metrics);
             }
@@ -1166,11 +1348,11 @@ void EM::run_safe() {
             cached_forests.push_back({persistent_root, graph.sentence_id, i, metrics_idx});
 
             // Debug: print memory every 500 forests
-            if (cached_forests.size() % 500 == 0) {
+            if (verbose_ && cached_forests.size() % 500 == 0) {
                 double mem_now = getMemoryUsageMB();
-                std::cout << "\n  [DEBUG] After " << cached_forests.size() << " forests: "
-                          << std::fixed << std::setprecision(1) << mem_now << " MB"
-                          << " (+" << (mem_now - initial_mem) << " MB from start)\n";
+//                std::cout << "\n  [DEBUG] After " << cached_forests.size() << " forests: "
+//                          << std::fixed << std::setprecision(1) << mem_now << " MB"
+//                          << " (+" << (mem_now - initial_mem) << " MB from start)\n";
             }
         } else if (profiling_enabled_) {
             graph_metrics_.push_back(metrics);
@@ -1180,18 +1362,36 @@ void EM::run_safe() {
     t2 = clock();
     double parse_time = (double)(t2 - t1) / CLOCKS_PER_SEC;
     double final_mem = getMemoryUsageMB();
-    std::cout << "\nParsing complete: " << cached_forests.size() << " forests cached, "
-              << skipped_count << " skipped (unsafe), in "
-              << parse_time << " seconds\n";
-    std::cout << "  [DEBUG] Final memory: " << std::fixed << std::setprecision(1) << final_mem << " MB"
-              << " (+" << (final_mem - initial_mem) << " MB from start)\n\n";
+    if (verbose_) {
+        std::cout << "\nParsing complete: " << cached_forests.size() << " forests cached, "
+                  << skipped_count << " skipped (unsafe), in "
+                  << parse_time << " seconds";
+        if (caching_enabled_) {
+            std::cout << " (cache hits: " << cache_hit_count
+                      << ", misses: " << cache_miss_count << ")";
+        }
+        std::cout << "\n";
+        std::cout << "  [DEBUG] Final memory: " << std::fixed << std::setprecision(1) << final_mem << " MB"
+                  << " (+" << (final_mem - initial_mem) << " MB from start)\n\n";
+    }
 
     if (profiling_enabled_ && !(output_dir == "N")) {
         writeMetricsToCSV(output_dir + "parse_metrics.csv");
     }
 
     // ========== Phase 2: EM iterations (identical to run()) ==========
-    std::cout << "Phase 2: Running EM iterations...\n";
+    if (verbose_) {
+        std::cout << "Phase 2: Running EM iterations...\n";
+    }
+
+    // Scale convergence threshold by number of cached forests
+    // (threshold is per-graph, e.g., 0.01 means converge when improvement < 0.01 * num_graphs)
+    double scaled_threshold = threshold * cached_forests.size();
+    if (verbose_) {
+        std::cout << "  (convergence threshold: " << std::fixed << std::setprecision(2)
+                  << scaled_threshold << " = " << threshold << " * "
+                  << cached_forests.size() << " graphs)\n";
+    }
 
     int iteration = 0;
     ll = 0;
@@ -1220,8 +1420,10 @@ void EM::run_safe() {
         for (size_t i = 0; i < cached_forests.size(); i++) {
             auto& cf = cached_forests[i];
 
-            std::cout << "\r[iter " << iteration << "] " << cf.sentence_id
-                      << " (" << (i + 1) << "/" << cached_forests.size() << ")" << std::flush;
+            if (verbose_) {
+                std::cout << "\r[iter " << iteration << "] " << cf.sentence_id
+                          << " (" << (i + 1) << "/" << cached_forests.size() << ")" << std::flush;
+            }
 
             double pw = computeInside(cf.root);
             computeOutsideFixed(cf.root);
@@ -1229,7 +1431,9 @@ void EM::run_safe() {
             ll += pw;
             history_graph_ll[cf.original_index].push_back(pw);
         }
-        std::cout << std::endl;
+        if (verbose_) {
+            std::cout << std::endl;
+        }
 
         updateEM();
 
@@ -1242,9 +1446,11 @@ void EM::run_safe() {
         double time_diff = (double)(t2 - t1) / CLOCKS_PER_SEC;
         times.push_back(time_diff);
 
-        std::cout << "iteration: " << iteration
-                  << "\nlog likelihood: " << ll
-                  << ", in " << time_diff << " seconds \n\n";
+        if (verbose_) {
+            std::cout << "iteration: " << iteration
+                      << "\nlog likelihood: " << ll
+                      << ", in " << time_diff << " seconds \n\n";
+        }
 
         lls.push_back(ll);
 
@@ -1256,12 +1462,21 @@ void EM::run_safe() {
         }
 
         iteration++;
-    } while (!converged());
+    } while (std::abs(ll - prev_ll) > scaled_threshold);  // Use scaled threshold
 
     if (profiling_enabled_ && !(output_dir == "N")) {
         writeMetricsToCSV(output_dir + "em_metrics.csv");
-        printMetricsSummary();
+        if (verbose_) {
+            printMetricsSummary();
+        }
     }
+
+    // Populate member variables for Python binding access
+    ll_history_ = lls;
+    iteration_times_ = times;
+    num_iterations_ = iteration;
+    converged_ = (std::abs(ll - prev_ll) <= scaled_threshold);  // Use scaled threshold
+    num_cached_forests_ = cached_forests.size();
 }
 
 void EM::run_1iter() {

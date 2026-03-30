@@ -1,1 +1,0 @@
-/usr/bin/c++  -fPIC -include functional -g -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/generate.dir/src/generate.cpp.o -o generate  libem_legacy.a libshrg.a

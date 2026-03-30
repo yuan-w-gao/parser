@@ -179,6 +179,7 @@ class SHRGParserBase {
     void SetPoolSize(uint max_pool_size) { max_pool_size_ = max_pool_size; }
 
     const EdsGraph *Graph() const { return graph_ptr_; }
+    void SetGraph(const EdsGraph* graph) { graph_ptr_ = graph; }
     bool IsVerbose() const { return verbose_; }
     const char *Type() const { return parser_type_; }
 

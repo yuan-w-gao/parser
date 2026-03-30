@@ -59,11 +59,13 @@ inline EMResult run_batch_em(
     EMResult result;
     result.converged = false;
 
-    auto& shrg_rules = manager.shrg_rules;
+    // Use grammars (grammar objects, 0 to hrg_size-1) for consistent indexing
+    // This matches Python EM export_forest which uses grammar_index = grammar_ptr - grammars.data()
+    auto& grammars = manager.grammars;
     auto& graphs = manager.edsgraphs;
 
-    if (shrg_rules.empty()) {
-        throw std::runtime_error("No SHRG rules loaded");
+    if (grammars.empty()) {
+        throw std::runtime_error("No grammars loaded");
     }
     if (graphs.empty()) {
         throw std::runtime_error("No graphs loaded");
@@ -84,30 +86,28 @@ inline EMResult run_batch_em(
         num_graphs = static_cast<size_t>(max_graphs);
     }
 
-    // Initialize weight history
-    size_t num_rules = shrg_rules.size();
+    // Initialize weight history - use grammar object count, not shrg_index count
+    size_t num_rules = grammars.size();
     result.weight_history.resize(num_rules);
 
     // Get rule dictionary and set initial weights
+    // Iterate over grammar objects (not shrg_rules) for consistent indexing
     LabelToRule rule_dict;
-    for (auto* rule : shrg_rules) {
-        rule_dict[rule->label_hash].push_back(rule);
+    for (auto& grammar : grammars) {
+        rule_dict[grammar.label_hash].push_back(&grammar);
     }
 
-    // Remove duplicates and set initial weights
+    // Set initial weights (no duplicates when iterating grammars directly)
     for (auto& pair : rule_dict) {
-        std::set<SHRG*> s(pair.second.begin(), pair.second.end());
-        pair.second = RuleVector(s.begin(), s.end());
-
         double initial_weight = std::log(1.0 / pair.second.size());
         for (auto* rule : pair.second) {
             rule->log_rule_weight = initial_weight;
         }
     }
 
-    // Record initial weights
+    // Record initial weights using grammar object indices
     for (size_t i = 0; i < num_rules; i++) {
-        result.weight_history[i].push_back(shrg_rules[i]->log_rule_weight);
+        result.weight_history[i].push_back(grammars[i].log_rule_weight);
     }
 
     clock_t start_time = clock();
@@ -152,13 +152,15 @@ inline EMResult run_batch_em(
     };
 
     // Helper function to add rule pointers
+    // Use grammar object index (pointer arithmetic) instead of shrg_index for consistent indexing
     std::function<void(ChartItem*)> addRulePointer = [&](ChartItem* root) {
         if (root->rule_visited == em::EMBase::VISITED) return;
 
         ChartItem* ptr = root;
         do {
-            auto grammar_index = ptr->attrs_ptr->grammar_ptr->best_cfg_ptr->shrg_index;
-            ptr->rule_ptr = shrg_rules[grammar_index];
+            // Compute grammar object index using pointer arithmetic
+            // This matches Python export_forest which uses: grammar_ptr - grammars.data()
+            ptr->rule_ptr = const_cast<SHRG*>(ptr->attrs_ptr->grammar_ptr);
             ptr->rule_visited = em::EMBase::VISITED;
 
             for (ChartItem* child : ptr->children) {
@@ -291,9 +293,9 @@ inline EMResult run_batch_em(
         ll = 0;
         clock_t iter_start = clock();
 
-        // Clear counts
-        for (auto* rule : shrg_rules) {
-            rule->log_count = ChartItem::log_zero;
+        // Clear counts for all grammar objects
+        for (auto& grammar : grammars) {
+            grammar.log_count = ChartItem::log_zero;
         }
 
         // E-step: compute expected counts for all graphs
@@ -332,23 +334,24 @@ inline EMResult run_batch_em(
             total_count[pair.first] = log_total;
         }
 
-        for (auto* rule : shrg_rules) {
+        // Update weights for each grammar object
+        for (auto& grammar : grammars) {
             double new_phi;
-            if (rule->log_count == ChartItem::log_zero) {
-                if (rule_dict[rule->label_hash].size() == 1) {
+            if (grammar.log_count == ChartItem::log_zero) {
+                if (rule_dict[grammar.label_hash].size() == 1) {
                     new_phi = 0.0;
                 } else {
                     new_phi = ChartItem::log_zero;
                 }
             } else {
-                new_phi = rule->log_count - total_count[rule->label_hash];
+                new_phi = grammar.log_count - total_count[grammar.label_hash];
             }
-            rule->log_rule_weight = new_phi;
+            grammar.log_rule_weight = new_phi;
         }
 
-        // Record history
+        // Record history using grammar object indices
         for (size_t i = 0; i < num_rules; i++) {
-            result.weight_history[i].push_back(shrg_rules[i]->log_rule_weight);
+            result.weight_history[i].push_back(grammars[i].log_rule_weight);
         }
         result.log_likelihoods.push_back(ll);
 
@@ -374,10 +377,10 @@ inline EMResult run_batch_em(
     result.elapsed_time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
     result.num_iterations = iteration;
 
-    // Copy final weights
+    // Copy final weights using grammar object indices
     result.final_weights.resize(num_rules);
     for (size_t i = 0; i < num_rules; i++) {
-        result.final_weights[i] = shrg_rules[i]->log_rule_weight;
+        result.final_weights[i] = grammars[i].log_rule_weight;
     }
 
     if (verbose) {
@@ -427,37 +430,51 @@ inline OptimizedEMResult run_em_optimized(
     bool use_safe_mode = false,
     int timeout_seconds = 5,
     const std::vector<std::string>& skip_graphs = {},
-    bool verbose = true
+    bool verbose = true,
+    bool parser_verbose = false  // Detailed parser stats (usually too noisy)
 ) {
     OptimizedEMResult result;
     result.converged = false;
     result.num_iterations = 0;
     result.num_forests_cached = 0;
 
-    auto& shrg_rules = manager.shrg_rules;
+    // Use grammars (grammar objects, 0 to hrg_size-1) for consistent indexing
+    // This matches Python EM export_forest which uses grammar_index = grammar_ptr - grammars.data()
+    auto& grammars = manager.grammars;
     auto& graphs = manager.edsgraphs;
 
-    if (shrg_rules.empty()) {
-        throw std::runtime_error("No SHRG rules loaded");
+    if (grammars.empty()) {
+        throw std::runtime_error("No grammars loaded");
     }
     if (graphs.empty()) {
         throw std::runtime_error("No graphs loaded");
+    }
+
+    // Create vector of pointers to grammar objects for em::EM compatibility
+    // em::EM takes std::vector<SHRG*>&, so we create pointers to grammars
+    std::vector<SHRG*> grammar_ptrs;
+    grammar_ptrs.reserve(grammars.size());
+    for (auto& g : grammars) {
+        grammar_ptrs.push_back(&g);
     }
 
     // Allocate and initialize context
     if (manager.contexts.empty()) {
         manager.Allocate(1);
     }
-    manager.InitAll("linear", verbose);
+    manager.InitAll("linear", parser_verbose);  // Use parser_verbose for detailed parser stats
 
     Context* context = manager.contexts[0];
 
     // Convert skip_graphs vector to set
     std::unordered_set<std::string> skip_set(skip_graphs.begin(), skip_graphs.end());
 
-    // Create the optimized EM instance
-    em::EM em_trainer(shrg_rules, graphs, context, convergence_threshold,
+    // Create the optimized EM instance with grammar object pointers
+    em::EM em_trainer(grammar_ptrs, graphs, context, convergence_threshold,
                       output_dir, timeout_seconds, skip_set);
+
+    // Set EM-level verbose (progress messages, skip notifications, summaries)
+    em_trainer.setVerbose(verbose);
 
     if (enable_profiling) {
         em_trainer.enableProfiling(true);
@@ -466,11 +483,11 @@ inline OptimizedEMResult run_em_optimized(
     // Initialize weights
     em_trainer.initializeWeights();
 
-    // Record initial weights
-    size_t num_rules = shrg_rules.size();
+    // Record initial weights using grammar object indices
+    size_t num_rules = grammars.size();
     result.weight_history.resize(num_rules);
     for (size_t i = 0; i < num_rules; i++) {
-        result.weight_history[i].push_back(shrg_rules[i]->log_rule_weight);
+        result.weight_history[i].push_back(grammars[i].log_rule_weight);
     }
 
     clock_t start_time = clock();
@@ -485,10 +502,10 @@ inline OptimizedEMResult run_em_optimized(
     clock_t end_time = clock();
     result.total_time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
 
-    // Copy results from EM trainer
+    // Copy results from EM trainer using grammar object indices
     result.final_weights.resize(num_rules);
     for (size_t i = 0; i < num_rules; i++) {
-        result.final_weights[i] = shrg_rules[i]->log_rule_weight;
+        result.final_weights[i] = grammars[i].log_rule_weight;
     }
 
     // Copy log likelihood history and iteration info
@@ -503,7 +520,7 @@ inline OptimizedEMResult run_em_optimized(
     }
 
     // Get number of cached forests
-    result.num_forests_cached = em_trainer.getForests().size();
+    result.num_forests_cached = em_trainer.getNumCachedForests();
 
     if (verbose) {
         std::cout << "\nOptimized EM completed in " << result.total_time << "s"
@@ -533,11 +550,18 @@ public:
         em_trainer_(nullptr),
         forests_cached_(false) {
 
-        if (manager_.shrg_rules.empty()) {
-            throw std::runtime_error("No SHRG rules loaded");
+        if (manager_.grammars.empty()) {
+            throw std::runtime_error("No grammars loaded");
         }
         if (manager_.edsgraphs.empty()) {
             throw std::runtime_error("No graphs loaded");
+        }
+
+        // Create vector of pointers to grammar objects for em::EM compatibility
+        // em::EM takes std::vector<SHRG*>&, so we create pointers to grammars
+        grammar_ptrs_.reserve(manager_.grammars.size());
+        for (auto& g : manager_.grammars) {
+            grammar_ptrs_.push_back(&g);
         }
 
         // Allocate and initialize context
@@ -564,8 +588,9 @@ public:
         }
 
         Context* context = manager_.contexts[0];
+        // Use grammar object pointers for consistent indexing
         em_trainer_ = new em::EM(
-            manager_.shrg_rules,
+            grammar_ptrs_,
             manager_.edsgraphs,
             context,
             convergence_threshold_,
@@ -599,8 +624,9 @@ public:
 
         if (!em_trainer_) {
             Context* context = manager_.contexts[0];
+            // Use grammar object pointers for consistent indexing
             em_trainer_ = new em::EM(
-                manager_.shrg_rules,
+                grammar_ptrs_,
                 manager_.edsgraphs,
                 context,
                 convergence_threshold_,
@@ -627,11 +653,11 @@ public:
         clock_t end_time = clock();
         result.total_time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
 
-        // Copy results from EM trainer
-        size_t num_rules = manager_.shrg_rules.size();
+        // Copy results from EM trainer using grammar object indices
+        size_t num_rules = manager_.grammars.size();
         result.final_weights.resize(num_rules);
         for (size_t i = 0; i < num_rules; i++) {
-            result.final_weights[i] = manager_.shrg_rules[i]->log_rule_weight;
+            result.final_weights[i] = manager_.grammars[i].log_rule_weight;
         }
 
         // Copy log likelihood history and iteration info
@@ -649,22 +675,22 @@ public:
         return result;
     }
 
-    // Get current weights
+    // Get current weights using grammar object indices
     std::vector<double> get_weights() const {
-        std::vector<double> weights(manager_.shrg_rules.size());
-        for (size_t i = 0; i < manager_.shrg_rules.size(); i++) {
-            weights[i] = manager_.shrg_rules[i]->log_rule_weight;
+        std::vector<double> weights(manager_.grammars.size());
+        for (size_t i = 0; i < manager_.grammars.size(); i++) {
+            weights[i] = manager_.grammars[i].log_rule_weight;
         }
         return weights;
     }
 
-    // Set weights
+    // Set weights using grammar object indices
     void set_weights(const std::vector<double>& weights) {
-        if (weights.size() != manager_.shrg_rules.size()) {
+        if (weights.size() != manager_.grammars.size()) {
             throw std::runtime_error("Weight vector size mismatch");
         }
         for (size_t i = 0; i < weights.size(); i++) {
-            manager_.shrg_rules[i]->log_rule_weight = weights[i];
+            manager_.grammars[i].log_rule_weight = weights[i];
         }
     }
 
@@ -698,6 +724,7 @@ private:
     std::string output_dir_;
     int timeout_seconds_;
     std::unordered_set<std::string> skip_set_;
+    std::vector<SHRG*> grammar_ptrs_;  // Pointers to grammar objects for em::EM
     em::EM* em_trainer_;
     bool forests_cached_;
     bool profiling_enabled_ = false;

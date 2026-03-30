@@ -12,10 +12,10 @@ namespace shrg {
 /**
  * @brief Compute derivation entropy for the current parse result
  *
- * This wraps the C++ ComputeDerivationEntropy function for Python.
- * Requires that inside-outside has been computed (via EM or explicit call).
+ * Uses the corrected DP algorithm (ComputeDerivationEntropyDP) which
+ * computes entropy without requiring pre-computed inside-outside values.
  *
- * @param context The parsing context after parse() and inside-outside computation
+ * @param context The parsing context after parse()
  * @return Entropy in nats, or 0 if no valid parse
  */
 inline double Context_ComputeEntropy(Context& context) {
@@ -23,20 +23,21 @@ inline double Context_ComputeEntropy(Context& context) {
     if (!root) {
         return 0.0;
     }
-    // Use the inside probability at root as the partition function
-    double log_partition = root->log_inside_prob;
-    return lexcxg::ComputeDerivationEntropy(root, log_partition);
+    return lexcxg::ComputeDerivationEntropyDP(root);
 }
 
 /**
  * @brief Compute entropy with explicit partition function
+ *
+ * @deprecated The log_partition argument is now ignored. Use Context_ComputeEntropy instead.
+ * This function now uses the DP algorithm which computes its own partition.
  */
-inline double Context_ComputeEntropyWithPartition(Context& context, double log_partition) {
+inline double Context_ComputeEntropyWithPartition(Context& context, double /*log_partition*/) {
     ChartItem* root = const_cast<ChartItem*>(context.Result());
     if (!root) {
         return 0.0;
     }
-    return lexcxg::ComputeDerivationEntropy(root, log_partition);
+    return lexcxg::ComputeDerivationEntropyDP(root);
 }
 
 /**
@@ -88,6 +89,8 @@ inline pybind11::dict Context_ComputeForestStats(Context& context) {
 
 /**
  * @brief Compute all ambiguity metrics at once
+ *
+ * Uses the corrected DP algorithm for entropy computation.
  */
 inline pybind11::dict Context_ComputeAllMetrics(Context& context) {
     ChartItem* root = const_cast<ChartItem*>(context.Result());
@@ -95,6 +98,7 @@ inline pybind11::dict Context_ComputeAllMetrics(Context& context) {
 
     if (!root) {
         result["entropy"] = 0.0;
+        result["log_partition"] = -std::numeric_limits<double>::infinity();
         result["expected_count"] = 0.0;
         result["num_nodes"] = 0;
         result["num_edges"] = 0;
@@ -106,10 +110,17 @@ inline pybind11::dict Context_ComputeAllMetrics(Context& context) {
         return result;
     }
 
-    double log_partition = root->log_inside_prob;
-    lexcxg::AmbiguityMetrics metrics = lexcxg::ComputeAllMetrics(root, log_partition);
+    // Use DP algorithm for entropy and partition
+    double log_Z = 0.0;
+    double entropy = 0.0;
+    lexcxg::ComputePartitionAndEntropyDP(root, log_Z, entropy);
 
-    result["entropy"] = metrics.entropy;
+    // Get other metrics using the existing function
+    lexcxg::AmbiguityMetrics metrics = lexcxg::ComputeAllMetrics(root, log_Z);
+
+    // Override entropy with DP-computed value
+    result["entropy"] = entropy;
+    result["log_partition"] = log_Z;
     result["expected_count"] = metrics.expected_count;
     result["num_nodes"] = metrics.forest_stats.num_nodes;
     result["num_edges"] = metrics.forest_stats.num_edges;
@@ -117,7 +128,7 @@ inline pybind11::dict Context_ComputeAllMetrics(Context& context) {
     result["avg_branching"] = metrics.forest_stats.avg_branching;
     result["complexity"] = metrics.forest_stats.complexity;
     result["num_alternatives"] = metrics.num_derivation_alternatives;
-    result["has_valid_probs"] = metrics.has_valid_probabilities;
+    result["has_valid_probs"] = std::isfinite(log_Z);
     return result;
 }
 
