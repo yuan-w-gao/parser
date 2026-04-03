@@ -170,7 +170,9 @@ float FindBestDerivationOracle(Generator *generator, ChartItem *root_ptr) {
 
 float FindBestDerivationWeight(ChartItem *root_ptr, Generator *generator) {
     if (!root_ptr) return -std::numeric_limits<float>::infinity();
-    if (root_ptr->status == VISITED)
+    // Use em_greedy_deriv for visited tracking (em_greedy_score is used by SampleDerivationTree)
+    // This frees up 'status' to store the CFG rule index for generation
+    if (root_ptr->em_greedy_deriv == VISITED)
         return root_ptr->score;
 
     ChartItem *ptr = root_ptr;
@@ -182,6 +184,14 @@ float FindBestDerivationWeight(ChartItem *root_ptr, Generator *generator) {
         if (ptr->attrs_ptr && ptr->attrs_ptr->grammar_ptr) {
             const SHRG *grammar_ptr = ptr->attrs_ptr->grammar_ptr;
             current_weight = grammar_ptr->log_rule_weight;
+
+            // Set the CFG rule index for proper word ordering during generation
+            // SelectRule() in parser_base.hpp uses status as CFG index
+            auto &cfg_rules = grammar_ptr->cfg_rules;
+            if (!cfg_rules.empty()) {
+                auto cfg_ptr = std::max_element(cfg_rules.begin(), cfg_rules.end());
+                ptr->status = static_cast<int>(cfg_ptr - cfg_rules.begin());
+            }
 
             for (auto edge_ptr : grammar_ptr->nonterminal_edges) {
                 ChartItem *child = generator->FindChartItemByEdge(ptr, edge_ptr);
@@ -202,7 +212,7 @@ float FindBestDerivationWeight(ChartItem *root_ptr, Generator *generator) {
     if (max_subgraph_ptr != root_ptr)
         root_ptr->Swap(*max_subgraph_ptr);
 
-    root_ptr->status = VISITED;
+    root_ptr->em_greedy_deriv = VISITED;  // Mark as visited
     root_ptr->score = static_cast<float>(max_weight);
     return root_ptr->score;
 }
